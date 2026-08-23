@@ -9,9 +9,15 @@
 }
 
 .page {
-  width: 100%;
-  margin: 0;
+  width: min(1600px, 100%);
+  margin: 0 auto;
   padding: 0;
+}
+
+.page--fluid {
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 .page h1 {
@@ -233,8 +239,6 @@ html[data-sidebar="collapsed"] .docs-nav__summary .nav-icon {
   }
 
   .page {
-    width: 100%;
-    margin: 0;
     padding: 0;
   }
 
