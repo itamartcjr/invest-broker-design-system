@@ -2,7 +2,7 @@ const navigation = [
   {
     key: 'start',
     title: 'Documentação',
-    short: '00',
+    short: 'D',
     items: [
       { key: 'home', label: 'Visão geral', href: 'index.html' },
       { key: 'coverage', label: 'Cobertura', href: 'getting-started/coverage.html' },
@@ -12,7 +12,7 @@ const navigation = [
   {
     key: 'app',
     title: 'Aplicativo',
-    short: '01',
+    short: 'A',
     items: [
       { key: 'app-foundations', label: 'Fundamentos', href: 'app/index.html' },
       { key: 'app-entities', label: 'Entidades', href: 'app/entities.html' },
@@ -25,7 +25,7 @@ const navigation = [
   {
     key: 'web',
     title: 'Web',
-    short: '02',
+    short: 'W',
     items: [
       { key: 'web-foundations', label: 'Fundamentos', href: 'web/index.html' },
       { key: 'web-data', label: 'Dados', href: 'web/data.html' },

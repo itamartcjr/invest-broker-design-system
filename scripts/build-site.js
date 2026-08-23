@@ -16,15 +16,21 @@ function prefixFor(route) {
 function replaceBrand(html) {
   return html.replace(/CIIMO/g, 'Invest Broker');
 }
+function injectDocumentationScripts(html, prefix) {
+  const scripts = `<script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script>`;
+  return html
+    .replace(/<script src="[^"]*catalog\.js"><\/script>/g, '')
+    .replace(/<script src="[^"]*docs\.js"><\/script>/g, '')
+    .replace(/<\/body>/, `${scripts}</body>`);
+}
 function transformExistingPage(html, route) {
   const prefix = prefixFor(route);
   let output = replaceBrand(html);
   output = output.replace(/<html([^>]*)>/, '<html$1 data-sidebar="collapsed">');
   output = output.replace(/<aside class="sidebar">[\s\S]*?<\/aside>/, renderSidebar({ currentPath: route, prefix }));
   output = output.replace(/<link rel="stylesheet" href="[^"]*styles\.css">/, `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css">`);
-  output = output.replace(/<script src="[^"]*catalog\.js"><\/script>/, `<script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script>`);
   output = output.replace(/<title>[^<]*<\/title>/, (match) => match.replace('CIIMO', 'Invest Broker'));
-  return output;
+  return injectDocumentationScripts(output, prefix);
 }
 function renderDocumentationPage(route, page) {
   const prefix = prefixFor(route);

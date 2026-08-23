@@ -18,8 +18,24 @@ if (missing.length) {
 const htmlFiles = required.filter((entry) => entry.endsWith('.html'));
 for (const entry of htmlFiles) {
   const html = fs.readFileSync(path.join(dist, entry), 'utf8');
+
   if (!html.includes('data-docs-sidebar')) {
     console.error(`Sidebar modular não encontrada em ${entry}`);
+    process.exit(1);
+  }
+
+  if (!html.includes('data-sidebar="collapsed"')) {
+    console.error(`Estado inicial colapsado ausente em ${entry}`);
+    process.exit(1);
+  }
+
+  if (!/<script src="(?:\.\.\/|\.\/)*docs\.js"><\/script>/.test(html)) {
+    console.error(`Script persistente da sidebar não encontrado em ${entry}`);
+    process.exit(1);
+  }
+
+  if (/data-nav-group="[^"]+"\s+open/.test(html)) {
+    console.error(`Grupo de menu forçado pela página de destino em ${entry}`);
     process.exit(1);
   }
 }
