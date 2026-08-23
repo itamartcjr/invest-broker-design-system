@@ -38,6 +38,16 @@ for (const entry of htmlFiles) {
     console.error(`Grupo de menu forçado pela página de destino em ${entry}`);
     process.exit(1);
   }
+
+  const isFluid = /<main class="page page--fluid">/.test(html);
+  if (entry === 'index.html' && !isFluid) {
+    console.error('A página inicial deve usar a variante page--fluid.');
+    process.exit(1);
+  }
+  if (entry !== 'index.html' && isFluid) {
+    console.error(`A variante page--fluid só pode existir na página inicial: ${entry}`);
+    process.exit(1);
+  }
 }
 
 console.log(`Build válido: ${htmlFiles.length} páginas documentais verificadas.`);
