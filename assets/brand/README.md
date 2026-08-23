@@ -1,15 +1,27 @@
-# CIIMO Brand Assets
+# CIIMO — assets oficiais de marca
 
-Arquivos oficiais derivados do componente de marca usado no produto (`invest-broker-app/src/components/Brand.ts`).
+Estes arquivos são os SVGs oficiais enviados pelo proprietário da marca e são a fonte de verdade para o desenho da assinatura e do símbolo. Não redesenhar, reconstruir paths, alterar proporções ou substituir por versões geradas.
 
-- `ciimo-primary-dark.svg`: assinatura principal para fundos escuros.
-- `ciimo-primary-light.svg`: assinatura principal para fundos claros.
-- `ciimo-symbol-lime.svg`: símbolo compacto preferencial.
-- `ciimo-symbol-white.svg`: símbolo compacto monocromático para fundos escuros.
-- `ciimo-symbol-black.svg`: símbolo compacto monocromático para fundos claros.
-- `favicon.svg` e `favicon-light.svg`: favicons usados pelo produto.
-- `logo192.png` e `logo512.png`: assets raster do PWA.
+## Arquivos-mestre
 
-Não altere proporções, paths ou cores dentro destes arquivos.
+### Assinatura completa
 
-A aplicação dos assets é documentada em `brand/identity.html`, gerado pelo Node a partir de `src/brand/brand-pages.js`. Estratégia, personalidade, posicionamento e linguagem ficam centralizados em `src/brand/brand-book.js`.
+- `ciimo_b.svg` — CIIMO preto.
+- `ciimo_w.svg` — CIIMO branco.
+- `ciimo_v.svg` — CIIMO verde `#D4FB00`.
+- `ciimo_cb.svg` — CIIMO preto com o “II” verde.
+- `ciimo_cw.svg` — CIIMO branco com o “II” verde.
+
+### Símbolo II
+
+- `ii_b.svg` — símbolo preto.
+- `ii_w.svg` — símbolo branco.
+- `ii_v.svg` — símbolo verde `#D4FB00`.
+
+## Uso no design system
+
+Em superfícies escuras, a assinatura preferencial é `ciimo_cw.svg`; em superfícies claras, `ciimo_cb.svg`. Para sidebar recolhida, favicon e espaços compactos, use a família `ii_*`, escolhendo a variante pelo contraste do fundo.
+
+Os nomes `ciimo-primary-*`, `ciimo-symbol-*` e `favicon*` permanecem apenas como aliases de compatibilidade para páginas antigas. Eles não são arquivos-mestre da identidade.
+
+Qualquer alteração futura na marca deve atualizar os arquivos-mestre e a documentação no mesmo commit.

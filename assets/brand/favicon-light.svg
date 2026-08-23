@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 183.61 308.54">
-  <path fill="#ffffff" d="M28.68,92.96v181.3h51.98V88.79l9.99-9.99V30.98l-61.97,61.97Z"/>
-  <path fill="#ffffff" d="M152.62,30.98l-61.96,61.95v181.32h61.97V30.98h-.01Z"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 183.61 308.54">
+  <path d="M28.68,92.96v181.3h51.98V88.79l9.99-9.99V30.98l-61.97,61.97Z"/>
+  <path d="M152.62,30.98l-61.96,61.95v181.32h61.97V30.98h-.01Z"/>
 </svg>
