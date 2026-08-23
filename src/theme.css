@@ -137,6 +137,10 @@ body,
   flex: 0 0 auto;
 }
 
+.docs-sidebar__brand-full {
+  width: 104px;
+}
+
 .docs-sidebar__theme {
   display: grid;
   place-items: center;
