@@ -9,6 +9,7 @@ const navigation = [
       { key: 'brand-personality', label: 'Personalidade e voz', href: 'brand/personality.html' },
       { key: 'brand-experience', label: 'Princípios de produto', href: 'brand/experience.html' },
       { key: 'brand-identity', label: 'Identidade visual', href: 'brand/identity.html' },
+      { key: 'brand-theme', label: 'Tema claro e escuro', href: 'brand/theme.html' },
     ],
   },
   {
