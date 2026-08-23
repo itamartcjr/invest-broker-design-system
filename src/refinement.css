@@ -1,0 +1,488 @@
+/*
+ * CIIMO visual refinement layer.
+ * Loaded after styles.css, docs.css and theme.css.
+ * Goal: quieter hierarchy, more breathing room and fewer simultaneous visual signals.
+ */
+
+:root {
+  --ui-weight: 500;
+  --ui-strong: 600;
+  --data-strong: 700;
+}
+
+body {
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+strong {
+  font-weight: var(--ui-strong);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: var(--ui-strong);
+}
+
+h1 {
+  max-width: 760px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -.04em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.14;
+  letter-spacing: -.025em;
+}
+
+h3 {
+  font-size: 1rem;
+  line-height: 1.35;
+  letter-spacing: -.01em;
+}
+
+p {
+  max-width: 72ch;
+}
+
+.library-tag,
+.eyebrow,
+.meta-label,
+.section-no,
+.type-label,
+.field label,
+th,
+.metric small {
+  color: var(--muted);
+  font-weight: var(--ui-strong);
+  letter-spacing: .075em;
+}
+
+code {
+  color: var(--muted);
+}
+
+/* Layout */
+.page {
+  padding: 32px clamp(24px, 4vw, 32px) 64px;
+}
+
+.page-head {
+  align-items: flex-start;
+  gap: 32px;
+  margin-bottom: 32px;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.page-head h1 {
+  margin: 10px 0 16px;
+}
+
+.page-index {
+  line-height: 1.8;
+}
+
+.section {
+  padding: 32px 0;
+  border-top: 0;
+}
+
+.section-head {
+  grid-template-columns: minmax(190px, .6fr) minmax(0, 1fr);
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.docs-page > .page-head {
+  gap: 32px;
+  padding: 32px 24px;
+}
+
+.docs-page > .section {
+  padding: 32px 24px;
+  border-top: 0;
+}
+
+.docs-page .section-head {
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.grid {
+  gap: 24px;
+}
+
+.grid-5,
+.grid-6 {
+  gap: 16px;
+}
+
+.stack {
+  gap: 16px;
+}
+
+.cluster {
+  gap: 10px;
+}
+
+.open-section {
+  padding: 32px 0;
+  border-bottom: 0;
+}
+
+/* Navigation */
+.sidebar {
+  padding: 16px 12px;
+  background: var(--surface);
+  border-right-color: var(--separator);
+}
+
+.docs-sidebar__top {
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.docs-sidebar__brand-full {
+  width: 96px;
+}
+
+.docs-sidebar__library {
+  margin-bottom: 24px;
+  color: var(--muted);
+}
+
+.docs-sidebar__toggle,
+.docs-sidebar__theme {
+  border-color: transparent;
+  background: transparent;
+}
+
+.docs-sidebar__toggle:hover,
+.docs-sidebar__theme:hover {
+  background: var(--interactive-hover);
+}
+
+.docs-nav {
+  gap: 4px;
+}
+
+.docs-nav__group {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.docs-nav__group + .docs-nav__group {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--separator);
+}
+
+.docs-nav__summary {
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: var(--r-sm);
+  font-weight: var(--ui-strong);
+}
+
+.nav-icon {
+  border-color: transparent;
+  font-weight: var(--ui-strong);
+}
+
+.docs-nav__links {
+  gap: 2px;
+  padding: 4px 0 8px 32px;
+}
+
+.docs-nav__link {
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: var(--r-sm);
+  font-weight: var(--ui-weight);
+}
+
+.docs-nav__link:hover {
+  border-color: transparent;
+}
+
+.docs-nav__link.active {
+  color: var(--accent);
+  background: transparent;
+  border-color: transparent;
+}
+
+.docs-sidebar__foot {
+  border-top-color: var(--separator);
+}
+
+/* Surfaces */
+.specimen,
+.card,
+.checkout-card,
+.hub-card {
+  background: var(--surface);
+  border-color: transparent;
+  border-radius: var(--r-md);
+}
+
+.specimen {
+  padding: 24px;
+}
+
+.specimen + .specimen {
+  margin-top: 24px;
+}
+
+.specimen-label {
+  margin-bottom: 24px;
+  padding-bottom: 0;
+  border-bottom: 0;
+  font-weight: var(--ui-weight);
+}
+
+.token,
+.metric {
+  border-color: transparent;
+  border-radius: var(--r-sm);
+}
+
+.token {
+  background: var(--surface);
+}
+
+.metric {
+  background: var(--metric-bg);
+}
+
+.metric strong {
+  font-size: 1rem;
+  font-weight: var(--ui-strong);
+}
+
+.card-footer {
+  border-top-color: var(--separator);
+}
+
+.sale-card {
+  background: var(--surface);
+  border-color: transparent;
+}
+
+.docs-page .brand-statement {
+  background: var(--surface);
+  border-color: transparent;
+  border-radius: var(--r-md);
+}
+
+.docs-page .brand-promise-card {
+  border-color: transparent;
+}
+
+.docs-page .brand-quote {
+  border-top-color: var(--separator);
+}
+
+.docs-page .icon-sample {
+  background: var(--surface);
+  border-color: transparent;
+  border-radius: var(--r-sm);
+}
+
+/* Controls */
+.btn,
+.chip,
+.icon-btn {
+  border-color: transparent;
+  font-weight: var(--ui-strong);
+}
+
+.btn {
+  min-height: 44px;
+  padding: 0 18px;
+  background: var(--soft);
+}
+
+.btn:not(.primary):not(.danger):hover,
+.icon-btn:hover {
+  background: var(--interactive-hover);
+}
+
+.btn.primary {
+  border-color: transparent;
+}
+
+.btn.danger {
+  border-color: transparent;
+  background: transparent;
+}
+
+.chip {
+  border-color: transparent;
+  background: var(--soft);
+  font-weight: var(--ui-weight);
+}
+
+.icon-btn {
+  background: transparent;
+}
+
+.avatar {
+  border-width: 1px;
+  font-weight: var(--ui-strong);
+}
+
+.input,
+.select,
+.textarea {
+  border-color: var(--separator);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--accent);
+}
+
+.upload {
+  border-color: var(--separator);
+  background: transparent;
+}
+
+/* Data and editorial density */
+.table-wrap {
+  border: 0;
+  border-radius: 0;
+}
+
+th {
+  color: var(--muted);
+  font-size: .7rem;
+}
+
+th,
+td {
+  padding: 16px;
+  border-bottom-color: var(--separator);
+}
+
+.list-row {
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom-color: var(--separator);
+}
+
+.alert {
+  border: 0;
+  background: var(--metric-bg);
+}
+
+.alert.success {
+  border: 0;
+  background: rgba(94, 224, 155, .08);
+}
+
+.alert.error {
+  border: 0;
+  background: rgba(255, 139, 139, .08);
+}
+
+/* Composed previews keep a structural frame. */
+.mini-shell,
+.phone {
+  border-color: var(--separator);
+}
+
+.mini-shell {
+  border-radius: var(--r-md);
+}
+
+.mini-main {
+  padding: 24px;
+}
+
+.screen-head {
+  margin-bottom: 24px;
+}
+
+.kpi strong,
+.property-price,
+.plan-price {
+  font-weight: var(--data-strong);
+}
+
+.kpi strong {
+  margin-top: 10px;
+  font-size: 1.4rem;
+}
+
+.property-price {
+  font-size: 1.25rem;
+}
+
+.plan-price {
+  font-size: 2.25rem;
+}
+
+.type-display {
+  font-size: 2.5rem;
+  font-weight: var(--ui-strong);
+  letter-spacing: -.035em;
+}
+
+.type-title {
+  font-size: 1.6rem;
+  font-weight: var(--ui-strong);
+}
+
+/* Accent is reserved for action, selection and meaningful state. */
+.docs-nav__link.active,
+.btn.primary,
+.chip.active,
+.bottom-nav .active,
+.price-meter,
+.timeline-item::before {
+  color: var(--accent);
+}
+
+.btn.primary,
+.chip.active {
+  color: var(--accent-text);
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 24px 16px 48px;
+  }
+
+  .page-head {
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .section {
+    padding: 24px 0;
+  }
+
+  .section-head,
+  .docs-page .section-head {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .docs-page > .page-head,
+  .docs-page > .section {
+    padding: 24px 16px;
+  }
+
+  .grid {
+    gap: 16px;
+  }
+}

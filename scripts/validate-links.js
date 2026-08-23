@@ -9,6 +9,7 @@ const documentationRoutes = new Set([
   'brand/positioning.html',
   'brand/personality.html',
   'brand/experience.html',
+  'brand/visual-principles.html',
   'brand/identity.html',
   'brand/theme.html',
   'getting-started/coverage.html',
@@ -16,7 +17,7 @@ const documentationRoutes = new Set([
   'getting-started/sources.html',
 ]);
 const required = [
-  'index.html', 'styles.css', 'docs.css', 'theme.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
+  'index.html', 'styles.css', 'docs.css', 'theme.css', 'refinement.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
   'assets/brand/ciimo_cw.svg',
   'assets/brand/ciimo_cb.svg',
   'assets/brand/ii_v.svg',
@@ -41,6 +42,25 @@ const themeCss = fs.readFileSync(path.join(dist, 'theme.css'), 'utf8');
 for (const contract of ['html[data-theme="light"]', '--bg: #f4f1ea', '--accent: #d4fb00', '.theme-preview--dark', '.theme-preview--light']) {
   if (!themeCss.includes(contract)) {
     console.error(`Contrato de tema ausente em theme.css: ${contract}`);
+    process.exit(1);
+  }
+}
+
+const refinementCss = fs.readFileSync(path.join(dist, 'refinement.css'), 'utf8');
+for (const contract of [
+  '--ui-weight: 500',
+  '--ui-strong: 600',
+  '--data-strong: 700',
+  '.sidebar {',
+  'background: var(--surface)',
+  '.docs-nav__link.active',
+  '.specimen,',
+  'border-color: transparent',
+  '.docs-page > .section',
+  'padding: 32px 24px',
+]) {
+  if (!refinementCss.includes(contract)) {
+    console.error(`Contrato de refinamento visual ausente: ${contract}`);
     process.exit(1);
   }
 }
@@ -75,9 +95,11 @@ for (const entry of htmlFiles) {
     process.exit(1);
   }
 
-  if (!html.includes('theme.css')) {
-    console.error(`Folha de tema não encontrada em ${entry}`);
-    process.exit(1);
+  for (const stylesheet of ['theme.css', 'refinement.css']) {
+    if (!html.includes(stylesheet)) {
+      console.error(`Folha ${stylesheet} não encontrada em ${entry}`);
+      process.exit(1);
+    }
   }
 
   if (!html.includes('data-theme-toggle')) {
@@ -149,4 +171,12 @@ for (const rule of ['#000000', '#F4F1EA', 'ciimo_cw.svg', 'ciimo_cb.svg', 'ii_v.
   }
 }
 
-console.log(`Build válido: ${htmlFiles.length} páginas verificadas com Marca, Light/Dark, App, Web e documentação.`);
+const visualPrinciples = fs.readFileSync(path.join(dist, 'brand', 'visual-principles.html'), 'utf8');
+for (const rule of ['Mais silêncio. Mais clareza.', '24 px', '32 px', '400', '500', '600', '700', 'Sem borda', 'Verde só quando importa']) {
+  if (!visualPrinciples.includes(rule)) {
+    console.error(`Documentação de princípios visuais incompleta: ${rule}`);
+    process.exit(1);
+  }
+}
+
+console.log(`Build válido: ${htmlFiles.length} páginas verificadas com Marca, princípios visuais, Light/Dark, App, Web e documentação.`);
