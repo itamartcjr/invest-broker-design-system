@@ -6,6 +6,7 @@ const dist = path.join(process.cwd(), 'dist');
 const documentationRoutes = new Set([
   'index.html',
   'getting-started/coverage.html',
+  'getting-started/icons.html',
   'getting-started/sources.html',
 ]);
 const required = [
@@ -17,6 +18,12 @@ const missing = required.filter((entry) => !fs.existsSync(path.join(dist, entry)
 if (missing.length) {
   console.error('Arquivos ausentes no build:');
   missing.forEach((entry) => console.error(`- ${entry}`));
+  process.exit(1);
+}
+
+const docsCss = fs.readFileSync(path.join(dist, 'docs.css'), 'utf8');
+if (!docsCss.includes('cdn.hugeicons.com/font/hgi-stroke-rounded.css')) {
+  console.error('Hugeicons Stroke Rounded não está carregado em docs.css.');
   process.exit(1);
 }
 
@@ -36,6 +43,11 @@ for (const entry of htmlFiles) {
 
   if (!html.includes('docs.js')) {
     console.error(`Script persistente da sidebar não encontrado em ${entry}`);
+    process.exit(1);
+  }
+
+  if (!html.includes('hgi-arrow-right-01')) {
+    console.error(`Setas da sidebar não usam Hugeicons em ${entry}`);
     process.exit(1);
   }
 

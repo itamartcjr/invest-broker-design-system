@@ -1,3 +1,5 @@
+@import url("https://cdn.hugeicons.com/font/hgi-stroke-rounded.css");
+
 :root {
   --sidebar-expanded: 248px;
   --sidebar-collapsed: 82px;
@@ -44,6 +46,90 @@
   margin-bottom: 24px;
 }
 
+.docs-page .icon-doc-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.docs-page .icon-sample {
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  min-height: 132px;
+  padding: 16px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+
+.docs-page .icon-sample i {
+  color: var(--accent);
+  font-size: 24px;
+}
+
+.docs-page .icon-sample code {
+  font-size: .72rem;
+}
+
+.docs-page .icon-size-row {
+  display: flex;
+  align-items: end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.docs-page .icon-size-item {
+  display: grid;
+  gap: 8px;
+  min-width: 110px;
+}
+
+.docs-page .icon-size-item i {
+  color: var(--text);
+}
+
+.docs-page .icon-size-item small {
+  color: var(--muted);
+}
+
+.docs-page .code-sample {
+  overflow: auto;
+  margin: 0;
+  padding: 16px;
+  background: #070707;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font-size: .82rem;
+}
+
+.docs-page .icon-rule-list {
+  display: grid;
+  gap: 10px;
+}
+
+.docs-page .icon-rule-list > div {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.docs-page .icon-rule-list > div:last-child {
+  border-bottom: 0;
+}
+
+.docs-page .icon-rule-list strong {
+  color: var(--text);
+}
+
+.docs-page .icon-rule-list span {
+  color: var(--muted);
+}
+
 .docs-sidebar {
   width: var(--sidebar-expanded);
   padding: 16px 10px;
@@ -76,8 +162,13 @@
   color: var(--text);
   background: var(--soft);
   cursor: pointer;
-  font-size: 1.25rem;
-  transition: transform .18s ease, background .18s ease;
+  font-size: 18px;
+  transition: background .18s ease;
+}
+
+.docs-sidebar__toggle i {
+  display: block;
+  transition: transform .18s ease;
 }
 
 .docs-sidebar__toggle:hover {
@@ -126,12 +217,15 @@
 }
 
 .docs-nav__chevron {
+  display: grid;
+  place-items: center;
   margin-left: auto;
+  font-size: 16px;
   transition: transform .18s ease;
 }
 
 .docs-nav__group[open] .docs-nav__chevron {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .docs-nav__links {
@@ -206,11 +300,11 @@ html[data-sidebar="collapsed"] .docs-sidebar .brand {
   flex: 0 0 auto;
 }
 
-html[data-sidebar="collapsed"] .docs-sidebar__toggle {
-  transform: rotate(0);
+html[data-sidebar="collapsed"] .docs-sidebar__toggle i {
+  transform: rotate(0deg);
 }
 
-html[data-sidebar="expanded"] .docs-sidebar__toggle {
+html[data-sidebar="expanded"] .docs-sidebar__toggle i {
   transform: rotate(180deg);
 }
 
@@ -257,6 +351,15 @@ html[data-sidebar="collapsed"] .docs-nav__summary .nav-icon {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 24px;
+  }
+
+  .docs-page .icon-doc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .docs-page .icon-rule-list > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 
   html[data-sidebar="collapsed"] .docs-nav__summary .nav-icon {

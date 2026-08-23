@@ -35,7 +35,21 @@ const coverage = shellContent({
   ],
 });
 
+const icons = shellContent({
+  eyebrow: 'Invest Broker / documentação / ícones',
+  title: 'Ícones.',
+  description: 'Hugeicons é a biblioteca oficial de ícones do Invest Broker. A documentação usa o Icon Font gratuito no estilo Stroke Rounded para manter consistência entre navegação, ações e estados.',
+  index: ['01 — Biblioteca', '02 — Escala', '03 — Interação', '04 — Implementação'],
+  sections: [
+    section('01', 'Biblioteca', 'Hugeicons / Stroke Rounded', 'Use um único sistema de ícones. Não misture caracteres Unicode, emojis ou desenhos avulsos quando houver equivalente na Hugeicons.', `<div class="grid grid-4"><div class="metric"><small>Biblioteca</small><strong>Hugeicons</strong></div><div class="metric"><small>Estilo</small><strong>Stroke Rounded</strong></div><div class="metric"><small>Cor</small><strong>currentColor</strong></div><div class="metric"><small>Entrega</small><strong>Icon Font CDN</strong></div></div><div class="icon-doc-grid" style="margin-top:24px"><div class="icon-sample"><i class="hgi-stroke hgi-home-01" aria-hidden="true"></i><code>home-01</code></div><div class="icon-sample"><i class="hgi-stroke hgi-search-01" aria-hidden="true"></i><code>search-01</code></div><div class="icon-sample"><i class="hgi-stroke hgi-user" aria-hidden="true"></i><code>user</code></div><div class="icon-sample"><i class="hgi-stroke hgi-arrow-right-01" aria-hidden="true"></i><code>arrow-right-01</code></div><div class="icon-sample"><i class="hgi-stroke hgi-arrow-down-01" aria-hidden="true"></i><code>arrow-down-01</code></div></div>`),
+    section('02', 'Escala', 'Tamanho segue hierarquia, não decoração', 'O ícone deve acompanhar a densidade do controle e nunca ser usado para compensar texto ou espaço insuficiente.', `<div class="icon-size-row"><div class="icon-size-item"><i class="hgi-stroke hgi-search-01" style="font-size:16px" aria-hidden="true"></i><strong>16 px</strong><small>Metadado e UI densa</small></div><div class="icon-size-item"><i class="hgi-stroke hgi-search-01" style="font-size:20px" aria-hidden="true"></i><strong>20 px</strong><small>Padrão de interface</small></div><div class="icon-size-item"><i class="hgi-stroke hgi-search-01" style="font-size:24px" aria-hidden="true"></i><strong>24 px</strong><small>Ação enfatizada</small></div><div class="icon-size-item"><span class="icon-btn" aria-hidden="true"><i class="hgi-stroke hgi-search-01" style="font-size:20px"></i></span><strong>44 px</strong><small>Alvo mínimo de toque</small></div></div>`),
+    section('03', 'Interação', 'Setas mantêm o mesmo ícone', 'Estados de expandir e recolher mudam por rotação. Não troque o ícone por caracteres diferentes entre estados.', `<div class="icon-rule-list"><div><strong>Sidebar principal</strong><span><code>arrow-right-01</code> em 18 px; aponta para a direita ao expandir e gira 180° quando o menu está aberto.</span></div><div><strong>Grupos do menu</strong><span><code>arrow-right-01</code> em 16 px; gira 90° quando o grupo está aberto.</span></div><div><strong>Cor</strong><span>Herda <code>currentColor</code> do controle. O estado visual vem do componente, não do ícone.</span></div><div><strong>Acessibilidade</strong><span>Ícones decorativos usam <code>aria-hidden="true"</code>. Botões somente com ícone precisam de <code>aria-label</code>.</span></div></div>`),
+    section('04', 'Implementação', 'HTML estático e componentes', 'No site de documentação o Icon Font é carregado uma vez por docs.css. Em aplicações React/React Native, mantenha a mesma família visual usando o pacote Hugeicons correspondente à plataforma.', `<div class="grid grid-2"><article class="specimen"><span class="variant-title">HTML</span><h3>Ícone decorativo</h3><pre class="code-sample"><code>&lt;i class="hgi-stroke hgi-search-01" aria-hidden="true"&gt;&lt;/i&gt;</code></pre></article><article class="specimen"><span class="variant-title">Controle</span><h3>Botão somente com ícone</h3><pre class="code-sample"><code>&lt;button aria-label="Buscar"&gt;\n  &lt;i class="hgi-stroke hgi-search-01" aria-hidden="true"&gt;&lt;/i&gt;\n&lt;/button&gt;</code></pre></article></div><div class="alert success" style="margin-top:16px">Fonte oficial: Hugeicons. Para novos ícones, procure primeiro na biblioteca e mantenha Stroke Rounded antes de criar qualquer alternativa.</div>`),
+  ],
+});
+
 const sourceLinks = [
+  ['Hugeicons', 'https://hugeicons.com/docs/icons-for-web/quick-start'],
   ['Type Scale', 'https://type-scale.com/'],
   ['Practical Typography', 'https://practicaltypography.com/'],
   ['Material responsive layout grid', 'https://m2.material.io/design/layout/responsive-layout-grid.html'],
@@ -58,6 +72,7 @@ const sources = shellContent({
 const documentationPages = {
   'index.html': { title: 'Invest Broker Design System', html: home },
   'getting-started/coverage.html': { title: 'Cobertura · Invest Broker Design System', html: coverage },
+  'getting-started/icons.html': { title: 'Ícones · Invest Broker Design System', html: icons },
   'getting-started/sources.html': { title: 'Referências · Invest Broker Design System', html: sources },
 };
 

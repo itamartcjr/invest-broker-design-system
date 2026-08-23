@@ -20,7 +20,7 @@ function renderSidebar({ currentPath = 'index.html', prefix = './' } = {}) {
       <span class="brand-word">IB</span>
     </a>
     <button class="docs-sidebar__toggle" type="button" data-sidebar-toggle aria-label="Expandir menu" aria-expanded="false" title="Expandir ou recolher menu">
-      <span aria-hidden="true">›</span>
+      <i class="hgi-stroke hgi-arrow-right-01" aria-hidden="true"></i>
     </button>
   </div>
   <span class="library-tag docs-sidebar__library">Design system</span>
@@ -30,7 +30,7 @@ function renderSidebar({ currentPath = 'index.html', prefix = './' } = {}) {
         <summary class="docs-nav__summary">
           <span class="nav-icon">${escapeHtml(group.short)}</span>
           <span class="nav-text">${escapeHtml(group.title)}</span>
-          <span class="docs-nav__chevron" aria-hidden="true">⌄</span>
+          <i class="hgi-stroke hgi-arrow-right-01 docs-nav__chevron" aria-hidden="true"></i>
         </summary>
         <div class="docs-nav__links">
           ${group.items.map((item) => {
