@@ -1,0 +1,56 @@
+/*
+ * CIIMO semantic color roles.
+ * Loaded after refinement.css so brand color and readable content color stay separate.
+ * --accent remains the official CIIMO Lime. --accent-content is used when green itself
+ * carries readable information over a neutral surface.
+ */
+
+:root,
+html[data-theme="dark"] {
+  --accent-content: #d4fb00;
+  --accent-focus: #d4fb00;
+  --accent-content-soft: rgba(212, 251, 0, .12);
+}
+
+html[data-theme="light"] {
+  --accent-content: #5b6c00;
+  --accent-focus: #5b6c00;
+  --accent-content-soft: rgba(91, 108, 0, .10);
+}
+
+/* Readable accent over neutral surfaces. */
+.docs-nav__link.active,
+.bottom-nav .active,
+.price-meter,
+.flow-head,
+.flow-year,
+.step.active,
+.feature-list li::before,
+.docs-page .icon-sample i {
+  color: var(--accent-content);
+}
+
+/* Focus and structural state need contrast against the surrounding surface. */
+.input:focus,
+.select:focus,
+.textarea:focus,
+.plan.featured,
+.flow-entry {
+  border-color: var(--accent-focus);
+}
+
+.timeline-item::before {
+  background: var(--accent-content);
+}
+
+/* Filled actions keep the official brand lime with dark foreground. */
+.btn.primary,
+.chip.active {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+/* Utility for documented or product states that need readable green text. */
+.accent-content {
+  color: var(--accent-content);
+}
