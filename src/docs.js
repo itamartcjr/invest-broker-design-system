@@ -1,10 +1,49 @@
 (() => {
   const root = document.documentElement;
+  const themeStateKey = 'ciimo-theme';
+
+  const readStoredTheme = () => {
+    try {
+      return localStorage.getItem(themeStateKey);
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const writeStoredTheme = (theme) => {
+    try {
+      localStorage.setItem(themeStateKey, theme);
+    } catch (error) {
+      // Storage can be unavailable in privacy-restricted contexts.
+    }
+  };
+
+  const applyTheme = (state, { persist = true } = {}) => {
+    const next = state === 'light' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    if (persist) writeStoredTheme(next);
+
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    if (themeToggle) {
+      const nextLabel = next === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro';
+      themeToggle.setAttribute('aria-label', nextLabel);
+      themeToggle.setAttribute('title', nextLabel);
+      themeToggle.setAttribute('aria-pressed', String(next === 'light'));
+    }
+  };
+
+  applyTheme(root.dataset.theme === 'light' ? 'light' : (readStoredTheme() === 'light' ? 'light' : 'dark'), { persist: false });
+
   const sidebar = document.querySelector('[data-docs-sidebar]');
   if (!sidebar) return;
 
   const sidebarStateKey = 'invest-broker-docs-sidebar';
   const toggle = sidebar.querySelector('[data-sidebar-toggle]');
+  const themeToggle = sidebar.querySelector('[data-theme-toggle]');
+
+  themeToggle?.addEventListener('click', () => {
+    applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light');
+  });
 
   const applySidebarState = (state) => {
     const next = state === 'expanded' ? 'expanded' : 'collapsed';
