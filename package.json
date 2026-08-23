@@ -1,11 +1,13 @@
 {
   "name": "invest-broker-design-system",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "commonjs",
   "scripts": {
     "clean": "node scripts/clean.js",
     "build": "npm run clean && node scripts/build-site.js",
-    "validate": "node scripts/validate-links.js"
+    "validate": "node scripts/validate-links.js",
+    "dev": "npm run build && node scripts/dev-server.js",
+    "start": "npm run dev"
   }
 }

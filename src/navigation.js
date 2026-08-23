@@ -1,5 +1,17 @@
 const navigation = [
   {
+    key: 'brand',
+    title: 'Marca',
+    short: 'B',
+    items: [
+      { key: 'brand-essence', label: 'Essência', href: 'brand/index.html' },
+      { key: 'brand-positioning', label: 'Posicionamento', href: 'brand/positioning.html' },
+      { key: 'brand-personality', label: 'Personalidade e voz', href: 'brand/personality.html' },
+      { key: 'brand-experience', label: 'Princípios de produto', href: 'brand/experience.html' },
+      { key: 'brand-identity', label: 'Identidade visual', href: 'brand/identity.html' },
+    ],
+  },
+  {
     key: 'start',
     title: 'Documentação',
     short: 'D',
@@ -43,7 +55,8 @@ function itemForPath(pathname) {
     const item = group.items.find((entry) => entry.href === normalized);
     if (item) return { group, item };
   }
-  return { group: navigation[0], item: navigation[0].items[0] };
+  const fallbackGroup = navigation.find((group) => group.key === 'start') || navigation[0];
+  return { group: fallbackGroup, item: fallbackGroup.items[0] };
 }
 
 module.exports = { navigation, itemForPath };

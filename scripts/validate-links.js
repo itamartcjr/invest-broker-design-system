@@ -5,12 +5,21 @@ const { navigation } = require('../src/navigation');
 const dist = path.join(process.cwd(), 'dist');
 const documentationRoutes = new Set([
   'index.html',
+  'brand/index.html',
+  'brand/positioning.html',
+  'brand/personality.html',
+  'brand/experience.html',
+  'brand/identity.html',
   'getting-started/coverage.html',
   'getting-started/icons.html',
   'getting-started/sources.html',
 ]);
 const required = [
-  'index.html', 'styles.css', 'docs.css', 'catalog.js', 'docs.js', '.nojekyll',
+  'index.html', 'styles.css', 'docs.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
+  'assets/brand/ciimo-primary-dark.svg',
+  'assets/brand/ciimo-primary-light.svg',
+  'assets/brand/ciimo-symbol-lime.svg',
+  'assets/brand/favicon.svg',
   ...navigation.flatMap((group) => group.items.map((item) => item.href)),
 ];
 
@@ -27,7 +36,7 @@ if (!docsCss.includes('cdn.hugeicons.com/font/hgi-stroke-rounded.css')) {
   process.exit(1);
 }
 
-const htmlFiles = required.filter((entry) => entry.endsWith('.html'));
+const htmlFiles = [...new Set(navigation.flatMap((group) => group.items.map((item) => item.href)))];
 for (const entry of htmlFiles) {
   const html = fs.readFileSync(path.join(dist, entry), 'utf8');
 
@@ -51,9 +60,11 @@ for (const entry of htmlFiles) {
     process.exit(1);
   }
 
-  if (html.includes('data-nav-group="start" open') || html.includes('data-nav-group="app" open') || html.includes('data-nav-group="web" open')) {
-    console.error(`Grupo de menu forçado pela página de destino em ${entry}`);
-    process.exit(1);
+  for (const group of navigation) {
+    if (html.includes(`data-nav-group="${group.key}" open`)) {
+      console.error(`Grupo de menu forçado pela página de destino em ${entry}`);
+      process.exit(1);
+    }
   }
 
   const hasDocsPage = html.includes('<main class="page docs-page">');
@@ -66,9 +77,21 @@ for (const entry of htmlFiles) {
     process.exit(1);
   }
   if (html.includes('page--fluid')) {
-    console.error(`A variante page--fluid não deve mais existir: ${entry}`);
+    console.error(`A variante page--fluid não deve existir: ${entry}`);
     process.exit(1);
   }
 }
 
-console.log(`Build válido: ${htmlFiles.length} páginas documentais verificadas.`);
+const appFoundations = fs.readFileSync(path.join(dist, 'app', 'index.html'), 'utf8');
+if (!appFoundations.includes('CIIMO / aplicativo')) {
+  console.error('A identidade CIIMO foi removida ou substituída indevidamente no App.');
+  process.exit(1);
+}
+
+const brandEssence = fs.readFileSync(path.join(dist, 'brand', 'index.html'), 'utf8');
+if (!brandEssence.includes('Seu imóvel deixa de ser apenas uma compra')) {
+  console.error('Promessa central da marca não está presente na documentação.');
+  process.exit(1);
+}
+
+console.log(`Build válido: ${htmlFiles.length} páginas verificadas, incluindo Marca, App, Web e documentação.`);

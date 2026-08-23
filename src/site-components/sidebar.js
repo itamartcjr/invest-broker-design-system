@@ -15,9 +15,9 @@ function renderSidebar({ currentPath = 'index.html', prefix = './' } = {}) {
   return `
 <aside class="sidebar docs-sidebar" data-docs-sidebar>
   <div class="docs-sidebar__top">
-    <a class="brand" href="${prefix}index.html" aria-label="Invest Broker Design System">
-      <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
-      <span class="brand-word">IB</span>
+    <a class="brand docs-sidebar__brand" href="${prefix}index.html" aria-label="CIIMO Design System">
+      <img class="docs-sidebar__brand-full" src="${prefix}assets/brand/ciimo-primary-dark.svg" alt="CIIMO">
+      <img class="docs-sidebar__brand-symbol" src="${prefix}assets/brand/ciimo-symbol-lime.svg" alt="" aria-hidden="true">
     </a>
     <button class="docs-sidebar__toggle" type="button" data-sidebar-toggle aria-label="Expandir menu" aria-expanded="false" title="Expandir ou recolher menu">
       <i class="hgi-stroke hgi-arrow-right-01" aria-hidden="true"></i>

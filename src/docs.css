@@ -11,7 +11,7 @@
 }
 
 /*
- * Regras de layout exclusivas das páginas geradas da documentação.
+ * Regras de layout exclusivas das páginas geradas da documentação e da marca.
  * App e Web continuam usando .page/.page-head/.section diretamente de styles.css.
  */
 .docs-page {
@@ -44,6 +44,35 @@
 .docs-page .section-head {
   gap: 24px;
   margin-bottom: 24px;
+}
+
+.docs-page .brand-statement {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, rgba(212, 251, 0, .09), rgba(255, 255, 255, .025));
+}
+
+.docs-page .brand-statement h2 {
+  max-width: 28ch;
+  margin: 10px 0 0;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 1.05;
+}
+
+.docs-page .brand-promise-card {
+  border-color: rgba(212, 251, 0, .3);
+}
+
+.docs-page .brand-quote {
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+}
+
+.docs-page .brand-list-row {
+  grid-template-columns: 1fr;
 }
 
 .docs-page .icon-doc-grid {
@@ -148,6 +177,21 @@
 .docs-sidebar .brand {
   min-width: 0;
   margin: 0 6px;
+}
+
+.docs-sidebar__brand-full {
+  display: block;
+  width: 122px;
+  max-height: 44px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.docs-sidebar__brand-symbol {
+  display: none;
+  width: 18px;
+  height: 30px;
+  object-fit: contain;
 }
 
 .docs-sidebar__toggle {
@@ -278,13 +322,17 @@ html[data-sidebar="collapsed"] .docs-sidebar {
   padding-right: 10px;
 }
 
-html[data-sidebar="collapsed"] .docs-sidebar .brand-word,
+html[data-sidebar="collapsed"] .docs-sidebar__brand-full,
 html[data-sidebar="collapsed"] .docs-sidebar__library,
 html[data-sidebar="collapsed"] .docs-nav__summary .nav-text,
 html[data-sidebar="collapsed"] .docs-nav__chevron,
 html[data-sidebar="collapsed"] .docs-nav__links,
 html[data-sidebar="collapsed"] .docs-sidebar__foot {
   display: none;
+}
+
+html[data-sidebar="collapsed"] .docs-sidebar__brand-symbol {
+  display: block;
 }
 
 html[data-sidebar="collapsed"] .docs-sidebar__top {
@@ -294,10 +342,6 @@ html[data-sidebar="collapsed"] .docs-sidebar__top {
 
 html[data-sidebar="collapsed"] .docs-sidebar .brand {
   margin: 0 auto;
-}
-
-.docs-sidebar .brand-mark {
-  flex: 0 0 auto;
 }
 
 html[data-sidebar="collapsed"] .docs-sidebar__toggle i {
@@ -360,6 +404,10 @@ html[data-sidebar="collapsed"] .docs-nav__summary .nav-icon {
   .docs-page .icon-rule-list > div {
     grid-template-columns: 1fr;
     gap: 6px;
+  }
+
+  .docs-page .brand-statement {
+    padding: 20px;
   }
 
   html[data-sidebar="collapsed"] .docs-nav__summary .nav-icon {
