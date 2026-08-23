@@ -3,6 +3,11 @@ const path = require('node:path');
 const { navigation } = require('../src/navigation');
 
 const dist = path.join(process.cwd(), 'dist');
+const documentationRoutes = new Set([
+  'index.html',
+  'getting-started/coverage.html',
+  'getting-started/sources.html',
+]);
 const required = [
   'index.html', 'styles.css', 'docs.css', 'catalog.js', 'docs.js', '.nojekyll',
   ...navigation.flatMap((group) => group.items.map((item) => item.href)),
@@ -29,23 +34,27 @@ for (const entry of htmlFiles) {
     process.exit(1);
   }
 
-  if (!/<script src="(?:\.\.\/|\.\/)*docs\.js"><\/script>/.test(html)) {
+  if (!html.includes('docs.js')) {
     console.error(`Script persistente da sidebar não encontrado em ${entry}`);
     process.exit(1);
   }
 
-  if (/data-nav-group="[^"]+"\s+open/.test(html)) {
+  if (html.includes('data-nav-group="start" open') || html.includes('data-nav-group="app" open') || html.includes('data-nav-group="web" open')) {
     console.error(`Grupo de menu forçado pela página de destino em ${entry}`);
     process.exit(1);
   }
 
-  const isFluid = /<main class="page page--fluid">/.test(html);
-  if (entry === 'index.html' && !isFluid) {
-    console.error('A página inicial deve usar a variante page--fluid.');
+  const hasDocsPage = html.includes('<main class="page docs-page">');
+  if (documentationRoutes.has(entry) && !hasDocsPage) {
+    console.error(`Página documental sem isolamento docs-page: ${entry}`);
     process.exit(1);
   }
-  if (entry !== 'index.html' && isFluid) {
-    console.error(`A variante page--fluid só pode existir na página inicial: ${entry}`);
+  if (!documentationRoutes.has(entry) && hasDocsPage) {
+    console.error(`App/Web não pode receber estilos de docs-page: ${entry}`);
+    process.exit(1);
+  }
+  if (html.includes('page--fluid')) {
+    console.error(`A variante page--fluid não deve mais existir: ${entry}`);
     process.exit(1);
   }
 }

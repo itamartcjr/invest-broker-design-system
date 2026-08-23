@@ -8,42 +8,38 @@
   transition: padding-left .18s ease;
 }
 
-.page {
-  width: min(1600px, 100%);
-  margin: 0 auto;
+/*
+ * Regras de layout exclusivas das páginas geradas da documentação.
+ * App e Web continuam usando .page/.page-head/.section diretamente de styles.css.
+ */
+.docs-page {
   padding: 0;
 }
 
-.page--fluid {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-}
-
-.page h1 {
+.docs-page h1 {
   font-size: clamp(2.2rem, 4vw, 3rem);
 }
 
-.page h2 {
+.docs-page h2 {
   font-size: 1.8125rem;
 }
 
-.page h3 {
+.docs-page h3 {
   font-size: 1.0625rem;
 }
 
-.page-head {
+.docs-page > .page-head {
   gap: 24px;
   margin: 0;
   padding: 32px 24px;
 }
 
-.page > .section {
+.docs-page > .section {
   scroll-margin-top: 32px;
   padding: 24px;
 }
 
-.section-head {
+.docs-page .section-head {
   gap: 24px;
   margin-bottom: 24px;
 }
@@ -238,26 +234,26 @@ html[data-sidebar="collapsed"] .docs-nav__summary .nav-icon {
     --sidebar-expanded: min(86vw, 248px);
   }
 
-  .page {
+  .docs-page {
     padding: 0;
   }
 
-  .page-head,
-  .page > .section {
+  .docs-page > .page-head,
+  .docs-page > .section {
     padding: 24px 16px;
   }
 
-  .page-head {
+  .docs-page > .page-head {
     align-items: flex-start;
     flex-direction: column;
   }
 
-  .page-index {
+  .docs-page .page-index {
     min-width: 0;
     text-align: left;
   }
 
-  .section-head {
+  .docs-page .section-head {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 24px;
