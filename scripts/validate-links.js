@@ -13,11 +13,12 @@ const documentationRoutes = new Set([
   'brand/identity.html',
   'brand/theme.html',
   'getting-started/coverage.html',
+  'getting-started/responsive.html',
   'getting-started/icons.html',
   'getting-started/sources.html',
 ]);
 const required = [
-  'index.html', 'styles.css', 'docs.css', 'theme.css', 'refinement.css', 'color-semantics.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
+  'index.html', 'styles.css', 'docs.css', 'theme.css', 'refinement.css', 'color-semantics.css', 'mobile.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
   'assets/brand/ciimo_cw.svg',
   'assets/brand/ciimo_cb.svg',
   'assets/brand/ii_v.svg',
@@ -81,10 +82,34 @@ for (const contract of [
   }
 }
 
+const mobileCss = fs.readFileSync(path.join(dist, 'mobile.css'), 'utf8');
+for (const contract of [
+  '@media (max-width: 760px)',
+  'padding-top: 64px',
+  'height: 100dvh',
+  'grid-template-columns: 1fr',
+  '.mini-side',
+  'display: none',
+  'overflow-x: auto',
+  'min-height: 44px',
+  '@media (max-width: 480px)',
+]) {
+  if (!mobileCss.includes(contract)) {
+    console.error(`Contrato responsivo ausente em mobile.css: ${contract}`);
+    process.exit(1);
+  }
+}
+
 const docsJs = fs.readFileSync(path.join(dist, 'docs.js'), 'utf8');
 if (!docsJs.includes("localStorage.setItem(themeStateKey, theme)")) {
   console.error('Preferência de tema não está persistindo em localStorage.');
   process.exit(1);
+}
+for (const contract of ["matchMedia('(max-width: 760px)')", "if (mobileMedia.matches) applySidebarState('collapsed')", "event.key === 'Escape'"]) {
+  if (!docsJs.includes(contract)) {
+    console.error(`Comportamento mobile da navegação ausente: ${contract}`);
+    process.exit(1);
+  }
 }
 
 const htmlFiles = [...new Set(navigation.flatMap((group) => group.items.map((item) => item.href)))];
@@ -111,7 +136,7 @@ for (const entry of htmlFiles) {
     process.exit(1);
   }
 
-  for (const stylesheet of ['theme.css', 'refinement.css', 'color-semantics.css']) {
+  for (const stylesheet of ['theme.css', 'refinement.css', 'color-semantics.css', 'mobile.css']) {
     if (!html.includes(stylesheet)) {
       console.error(`Folha ${stylesheet} não encontrada em ${entry}`);
       process.exit(1);
@@ -195,4 +220,12 @@ for (const rule of ['Mais silêncio. Mais clareza.', '24 px', '32 px', '400', '5
   }
 }
 
-console.log(`Build válido: ${htmlFiles.length} páginas verificadas com Marca, contraste Light, princípios visuais, Light/Dark, App, Web e documentação.`);
+const responsivePage = fs.readFileSync(path.join(dist, 'getting-started', 'responsive.html'), 'utf8');
+for (const rule of ['Mobile primeiro na composição.', '64 px', '100dvh', '16 px nas laterais', '≥ 44 px', '320 px', '760 px']) {
+  if (!responsivePage.includes(rule)) {
+    console.error(`Documentação responsiva incompleta: ${rule}`);
+    process.exit(1);
+  }
+}
+
+console.log(`Build válido: ${htmlFiles.length} páginas verificadas com Marca, responsividade, contraste Light, princípios visuais, Light/Dark, App, Web e documentação.`);

@@ -4,6 +4,7 @@ const { renderSidebar } = require('../src/site-components/sidebar');
 const { documentationPages } = require('../src/site-pages');
 const { themePage } = require('../src/theme-page');
 const { visualPrinciplesPage } = require('../src/visual-principles-page');
+const { responsivePage } = require('../src/responsive-page');
 
 const root = process.cwd();
 const dist = path.join(root, 'dist');
@@ -29,7 +30,7 @@ function themeBootScript() {
   return `<script>(function(){try{var t=localStorage.getItem('ciimo-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})();</script>`;
 }
 function styleLinks(prefix) {
-  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css">`;
+  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css">`;
 }
 function injectDocumentationScripts(html, prefix) {
   const scripts = `<script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script>`;
@@ -62,6 +63,7 @@ copy(path.join(root, 'src', 'docs.css'), path.join(dist, 'docs.css'));
 copy(path.join(root, 'src', 'theme.css'), path.join(dist, 'theme.css'));
 copy(path.join(root, 'src', 'refinement.css'), path.join(dist, 'refinement.css'));
 copy(path.join(root, 'src', 'color-semantics.css'), path.join(dist, 'color-semantics.css'));
+copy(path.join(root, 'src', 'mobile.css'), path.join(dist, 'mobile.css'));
 copy(path.join(root, 'src', 'docs.js'), path.join(dist, 'docs.js'));
 copyDir(path.join(root, 'assets', 'brand'), path.join(dist, 'assets', 'brand'));
 
@@ -80,5 +82,6 @@ for (const [route, page] of Object.entries(documentationPages)) {
 
 write(path.join(dist, themePage.route), renderDocumentationPage(themePage.route, themePage.page));
 write(path.join(dist, visualPrinciplesPage.route), renderDocumentationPage(visualPrinciplesPage.route, visualPrinciplesPage.page));
+write(path.join(dist, responsivePage.route), renderDocumentationPage(responsivePage.route, responsivePage.page));
 write(path.join(dist, 'branding.html'), redirectDocument('./brand/identity.html', 'Identidade visual · CIIMO Design System'));
 write(path.join(dist, '.nojekyll'), '');

@@ -40,6 +40,7 @@
   const sidebarStateKey = 'invest-broker-docs-sidebar';
   const toggle = sidebar.querySelector('[data-sidebar-toggle]');
   const themeToggle = sidebar.querySelector('[data-theme-toggle]');
+  const mobileMedia = window.matchMedia('(max-width: 760px)');
 
   themeToggle?.addEventListener('click', () => {
     applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light');
@@ -56,7 +57,12 @@
     }
   };
 
-  applySidebarState(sessionStorage.getItem(sidebarStateKey) || root.dataset.sidebar || 'collapsed');
+  const storedSidebarState = sessionStorage.getItem(sidebarStateKey) || root.dataset.sidebar || 'collapsed';
+  applySidebarState(mobileMedia.matches ? 'collapsed' : storedSidebarState);
+
+  mobileMedia.addEventListener?.('change', (event) => {
+    if (event.matches) applySidebarState('collapsed');
+  });
 
   toggle?.addEventListener('click', () => {
     applySidebarState(root.dataset.sidebar === 'expanded' ? 'collapsed' : 'expanded');
@@ -119,6 +125,7 @@
       currentMain.replaceWith(nextMain);
       document.title = nextDocument.title || document.title;
       updateActiveLink(url);
+      if (mobileMedia.matches) applySidebarState('collapsed');
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     } catch (error) {
       window.location.href = url.href;
@@ -147,6 +154,11 @@
   });
 
   window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && root.dataset.sidebar === 'expanded') {
+      applySidebarState('collapsed');
+      return;
+    }
+
     if (event.key === '[' && !/input|textarea|select/i.test(document.activeElement?.tagName || '')) {
       applySidebarState(root.dataset.sidebar === 'expanded' ? 'collapsed' : 'expanded');
     }

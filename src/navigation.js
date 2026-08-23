@@ -20,6 +20,7 @@ const navigation = [
     items: [
       { key: 'home', label: 'Visão geral', href: 'index.html' },
       { key: 'coverage', label: 'Cobertura', href: 'getting-started/coverage.html' },
+      { key: 'responsive', label: 'Responsividade', href: 'getting-started/responsive.html' },
       { key: 'icons', label: 'Ícones', href: 'getting-started/icons.html' },
       { key: 'sources', label: 'Referências', href: 'getting-started/sources.html' },
     ],
