@@ -1,5 +1,6 @@
-function shellContent({ eyebrow, title, description, index = [], sections = [] }) {
-  return `<main class="page">
+function shellContent({ eyebrow, title, description, index = [], sections = [], fluid = false }) {
+  const pageClass = fluid ? 'page page--fluid' : 'page';
+  return `<main class="${pageClass}">
 <header class="page-head"><div><span class="eyebrow">${eyebrow}</span><h1>${title}</h1><p>${description}</p></div><div class="page-index">${index.join('<br>')}</div></header>
 ${sections.join('\n')}
 </main>`;
@@ -10,6 +11,7 @@ function section(number, label, title, description, body) {
 }
 
 const home = shellContent({
+  fluid: true,
   eyebrow: 'Invest Broker / design system',
   title: 'Documentação do produto.',
   description: 'A organização usa navegação lateral e cobertura de design system, enquanto a linguagem visual continua sendo a do CIIMO: escura, plana, densa e orientada a dados.',
@@ -28,7 +30,7 @@ const coverage = shellContent({
   description: 'Cada área deve documentar anatomia, variantes, estados, comportamento, conteúdo, acessibilidade e teste antes de ser considerada completa.',
   index: ['01 — Fundamentos', '02 — Componentes', '03 — Domínio', '04 — Critério de pronto'],
   sections: [
-    section('01', 'Fundamentos', 'Base visual e de comportamento', 'Cor, tipografia, spacing, radius, grid, motion, acessibilidade e comportamento responsivo seguem os tokens já documentados no CIIMO.', `<div class="cluster"><span class="chip">Color</span><span class="chip">Typography</span><span class="chip">Spacing</span><span class="chip">Radius</span><span class="chip">Grid</span><span class="chip">Motion</span><span class="chip">A11y</span></div><div class="grid grid-4" style="margin-top:24px"><div class="metric"><small>Spacing</small><strong>6 · 10 · 16 · 24 · 32</strong></div><div class="metric"><small>Sidebar desktop</small><strong>82 / 248 px</strong></div><div class="metric"><small>Page width</small><strong>100%</strong></div><div class="metric"><small>Page shell</small><strong>0 px · seção 24 px</strong></div></div><p style="margin-top:16px">A página ocupa sempre 100% da largura disponível, sem max-width e sem padding próprio. No desktop, o cabeçalho usa 32 px como espaço macro e cada seção interna usa 24 px, o token de seção do CIIMO. No mobile, cabeçalho e seções usam 24 px no eixo vertical e 16 px no horizontal.</p>`),
+    section('01', 'Fundamentos', 'Base visual e de comportamento', 'Cor, tipografia, spacing, radius, grid, motion, acessibilidade e comportamento responsivo seguem os tokens já documentados no CIIMO.', `<div class="cluster"><span class="chip">Color</span><span class="chip">Typography</span><span class="chip">Spacing</span><span class="chip">Radius</span><span class="chip">Grid</span><span class="chip">Motion</span><span class="chip">A11y</span></div><div class="grid grid-4" style="margin-top:24px"><div class="metric"><small>Spacing</small><strong>6 · 10 · 16 · 24 · 32</strong></div><div class="metric"><small>Sidebar desktop</small><strong>82 / 248 px</strong></div><div class="metric"><small>Page padrão</small><strong>até 1600 px</strong></div><div class="metric"><small>Home docs</small><strong>100%</strong></div></div><p style="margin-top:16px">O shell padrão das páginas de App, Web e páginas internas da documentação preserva o limite de 1600 px do CIIMO e continua sem padding próprio. Somente a página inicial usa a variante <code>page--fluid</code> com 100% da largura. No desktop, o cabeçalho usa 32 px como espaço macro e cada seção interna usa 24 px; no mobile, cabeçalho e seções usam 24 px no eixo vertical e 16 px no horizontal.</p>`),
     section('02', 'Componentes', 'Documentar além do preview', 'Cada componente precisa mostrar como funciona, quando usar e como se comporta nos estados reais do produto.', `<div class="anatomy"><div><b>01 Overview</b><span>Objetivo</span></div><div><b>02 Anatomy</b><span>Partes</span></div><div><b>03 States</b><span>Estados</span></div><div><b>04 Behavior</b><span>Interação</span></div></div>`),
     section('03', 'Domínio', 'Investimento imobiliário como camada própria', 'Carteira, imóvel, empreendimento, fluxo, valorização, benchmark, lançamento e acompanhamento consultivo entram como peças específicas.', `<div class="grid grid-3"><div class="specimen"><h3>Carteira</h3><p>Resumo, composição, concentração e evolução.</p></div><div class="specimen"><h3>Ativo</h3><p>Unidade, preço, histórico e comparáveis.</p></div><div class="specimen"><h3>Consultoria</h3><p>Sinais, revisão, recomendação e memória.</p></div></div>`),
     section('04', 'Pronto', 'Contrato mínimo por página', 'Uma página só está pronta quando a regra de uso é tão clara quanto o exemplo visual.', `<div class="alert success">Overview · Anatomy · Variants · Sizes · States · Behavior · Content · Accessibility · Testing · Do / Don't</div>`),
