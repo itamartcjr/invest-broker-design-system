@@ -10,16 +10,17 @@ const documentationRoutes = new Set([
   'brand/personality.html',
   'brand/experience.html',
   'brand/identity.html',
+  'brand/theme.html',
   'getting-started/coverage.html',
   'getting-started/icons.html',
   'getting-started/sources.html',
 ]);
 const required = [
-  'index.html', 'styles.css', 'docs.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
-  'assets/brand/ciimo-primary-dark.svg',
-  'assets/brand/ciimo-primary-light.svg',
-  'assets/brand/ciimo-symbol-lime.svg',
-  'assets/brand/favicon.svg',
+  'index.html', 'styles.css', 'docs.css', 'theme.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
+  'assets/brand/ciimo_cw.svg',
+  'assets/brand/ciimo_cb.svg',
+  'assets/brand/ii_v.svg',
+  'assets/brand/ii_b.svg',
   ...navigation.flatMap((group) => group.items.map((item) => item.href)),
 ];
 
@@ -36,6 +37,20 @@ if (!docsCss.includes('cdn.hugeicons.com/font/hgi-stroke-rounded.css')) {
   process.exit(1);
 }
 
+const themeCss = fs.readFileSync(path.join(dist, 'theme.css'), 'utf8');
+for (const contract of ['html[data-theme="light"]', '--bg: #f4f1ea', '--accent: #d4fb00', '.theme-preview--dark', '.theme-preview--light']) {
+  if (!themeCss.includes(contract)) {
+    console.error(`Contrato de tema ausente em theme.css: ${contract}`);
+    process.exit(1);
+  }
+}
+
+const docsJs = fs.readFileSync(path.join(dist, 'docs.js'), 'utf8');
+if (!docsJs.includes("localStorage.setItem(themeStateKey, theme)")) {
+  console.error('Preferência de tema não está persistindo em localStorage.');
+  process.exit(1);
+}
+
 const htmlFiles = [...new Set(navigation.flatMap((group) => group.items.map((item) => item.href)))];
 for (const entry of htmlFiles) {
   const html = fs.readFileSync(path.join(dist, entry), 'utf8');
@@ -48,6 +63,38 @@ for (const entry of htmlFiles) {
   if (!html.includes('data-sidebar="collapsed"')) {
     console.error(`Estado inicial colapsado ausente em ${entry}`);
     process.exit(1);
+  }
+
+  if (!html.includes('data-theme="dark"')) {
+    console.error(`Tema padrão dark ausente em ${entry}`);
+    process.exit(1);
+  }
+
+  if (!html.includes('ciimo-theme')) {
+    console.error(`Bootstrap de tema sem persistência em ${entry}`);
+    process.exit(1);
+  }
+
+  if (!html.includes('theme.css')) {
+    console.error(`Folha de tema não encontrada em ${entry}`);
+    process.exit(1);
+  }
+
+  if (!html.includes('data-theme-toggle')) {
+    console.error(`Controle de tema não encontrado em ${entry}`);
+    process.exit(1);
+  }
+
+  if (!html.includes('hgi-sun-03') || !html.includes('hgi-moon-02')) {
+    console.error(`Controle Light/Dark não usa Hugeicons em ${entry}`);
+    process.exit(1);
+  }
+
+  for (const asset of ['ciimo_cw.svg', 'ciimo_cb.svg', 'ii_v.svg', 'ii_b.svg']) {
+    if (!html.includes(asset)) {
+      console.error(`Sidebar não usa o SVG oficial ${asset} em ${entry}`);
+      process.exit(1);
+    }
   }
 
   if (!html.includes('docs.js')) {
@@ -94,4 +141,12 @@ if (!brandEssence.includes('Seu imóvel deixa de ser apenas uma compra')) {
   process.exit(1);
 }
 
-console.log(`Build válido: ${htmlFiles.length} páginas verificadas, incluindo Marca, App, Web e documentação.`);
+const themePage = fs.readFileSync(path.join(dist, 'brand', 'theme.html'), 'utf8');
+for (const rule of ['#000000', '#F4F1EA', 'ciimo_cw.svg', 'ciimo_cb.svg', 'ii_v.svg', 'ii_b.svg', 'localStorage']) {
+  if (!themePage.includes(rule)) {
+    console.error(`Documentação de tema incompleta: ${rule}`);
+    process.exit(1);
+  }
+}
+
+console.log(`Build válido: ${htmlFiles.length} páginas verificadas com Marca, Light/Dark, App, Web e documentação.`);
