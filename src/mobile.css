@@ -1,1 +1,372 @@
-placeholder
+/*
+ * CIIMO responsive layer.
+ * Loaded last so mobile behavior is explicit and does not leak into desktop.
+ * Mobile keeps the same tokens and visual hierarchy with a narrower composition.
+ */
+
+@media (max-width: 760px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .catalog,
+  html[data-sidebar="collapsed"] .catalog,
+  html[data-sidebar="expanded"] .catalog {
+    min-height: 100dvh;
+    padding-left: 0;
+    padding-top: 64px;
+  }
+
+  .docs-sidebar,
+  html[data-sidebar="collapsed"] .docs-sidebar,
+  html[data-sidebar="expanded"] .docs-sidebar {
+    inset: 0 0 auto 0;
+    width: 100%;
+    max-width: none;
+    height: 64px;
+    padding: 10px 12px;
+    overflow: hidden;
+    border-right: 0;
+    border-bottom: 1px solid var(--separator);
+    background: var(--surface);
+  }
+
+  .docs-sidebar__top,
+  html[data-sidebar="collapsed"] .docs-sidebar__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    margin: 0;
+  }
+
+  .docs-sidebar .brand,
+  html[data-sidebar="collapsed"] .docs-sidebar .brand {
+    margin: 0;
+  }
+
+  html[data-sidebar="collapsed"] .docs-sidebar__actions {
+    flex-direction: row;
+  }
+
+  .docs-sidebar__toggle,
+  .docs-sidebar__theme {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  html[data-sidebar="expanded"] body {
+    overflow: hidden;
+  }
+
+  html[data-sidebar="expanded"] .docs-sidebar {
+    height: 100dvh;
+    padding: 10px 16px 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  html[data-sidebar="expanded"] .docs-sidebar__top {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    background: var(--surface);
+  }
+
+  html[data-sidebar="expanded"] .docs-sidebar__brand-full {
+    width: 96px;
+  }
+
+  html[data-sidebar="expanded"] .docs-sidebar__library {
+    margin: 0 8px 16px;
+  }
+
+  html[data-sidebar="expanded"] .docs-nav {
+    gap: 4px;
+    overflow: visible;
+  }
+
+  html[data-sidebar="expanded"] .docs-nav__summary {
+    min-height: 48px;
+    padding: 8px;
+  }
+
+  html[data-sidebar="expanded"] .docs-nav__links {
+    padding: 4px 0 12px 32px;
+  }
+
+  html[data-sidebar="expanded"] .docs-nav__link {
+    min-height: 48px;
+    padding: 10px 12px;
+  }
+
+  .page {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 24px 16px 48px;
+  }
+
+  .docs-page {
+    padding: 0;
+  }
+
+  .docs-page > .page-head,
+  .docs-page > .section {
+    padding: 24px 16px;
+  }
+
+  .page-head {
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .page-head h1,
+  .docs-page h1 {
+    max-width: none;
+    font-size: clamp(1.9rem, 9vw, 2.65rem);
+    line-height: 1.08;
+  }
+
+  .docs-page h2,
+  h2 {
+    font-size: clamp(1.35rem, 6.5vw, 1.75rem);
+  }
+
+  .page-head p,
+  .section-head p,
+  p {
+    max-width: none;
+  }
+
+  .page-index {
+    display: none;
+  }
+
+  .section {
+    padding: 24px 0;
+  }
+
+  .section-head,
+  .docs-page .section-head {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-5,
+  .grid-6,
+  .pricing-grid,
+  .checkout,
+  .form-row,
+  .form-row.two,
+  .anatomy,
+  .hub-cards,
+  .theme-preview-grid,
+  .docs-page .icon-doc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid,
+  .pricing-grid,
+  .checkout,
+  .form-row,
+  .anatomy,
+  .hub-cards,
+  .theme-preview-grid,
+  .docs-page .icon-doc-grid {
+    gap: 16px;
+  }
+
+  .specimen,
+  .card,
+  .checkout-card,
+  .hub-card {
+    padding: 16px;
+  }
+
+  .specimen + .specimen {
+    margin-top: 16px;
+  }
+
+  .metric,
+  .token {
+    padding: 16px;
+  }
+
+  .list-row,
+  .docs-page .brand-list-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 16px 0;
+  }
+
+  .input,
+  .select,
+  .textarea {
+    font-size: 16px;
+  }
+
+  .btn,
+  .chip,
+  .icon-btn,
+  .docs-sidebar__toggle,
+  .docs-sidebar__theme {
+    min-height: 44px;
+  }
+
+  .btn {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .plan {
+    min-height: 0;
+  }
+
+  .table-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 640px;
+  }
+
+  .flow {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    grid-template-columns: 58px repeat(12, 74px);
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabs {
+    margin-inline: -16px;
+    padding-inline: 16px;
+    scroll-padding-inline: 16px;
+    overscroll-behavior-inline: contain;
+  }
+
+  .mini-shell {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .mini-side {
+    display: none;
+  }
+
+  .mini-main {
+    grid-column: 1;
+    padding: 16px;
+  }
+
+  .screen-head {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .screen-head h3 {
+    text-align: left;
+  }
+
+  .screen-head .right {
+    justify-self: start;
+    flex-wrap: wrap;
+  }
+
+  .phone {
+    width: 100%;
+    max-width: 390px;
+    padding: 10px;
+    border-radius: 28px;
+  }
+
+  .phone-content {
+    min-height: 520px;
+    padding: 12px 6px;
+  }
+
+  .bottom-nav {
+    gap: 2px;
+    padding: 10px 4px;
+  }
+
+  .bottom-nav span {
+    font-size: .64rem;
+  }
+
+  .hub {
+    min-height: calc(100dvh - 64px);
+    padding: 24px 16px;
+  }
+
+  .hub-cards {
+    margin-top: 32px;
+  }
+
+  .hub-card {
+    min-height: 0;
+  }
+
+  .theme-preview {
+    min-height: 260px;
+    padding: 16px;
+  }
+
+  .theme-preview > img {
+    width: min(180px, 72%);
+    height: 60px;
+  }
+
+  .docs-page .icon-rule-list > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .client-card .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .screen-head .right {
+    width: 100%;
+  }
+
+  .screen-head .right .btn {
+    flex: 1 1 140px;
+  }
+
+  .checkout-card .btn,
+  .plan .btn {
+    width: 100%;
+  }
+
+  .theme-preview__surface {
+    padding: 16px;
+  }
+}
