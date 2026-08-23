@@ -29,16 +29,16 @@
 .page-head {
   gap: 24px;
   margin: 0;
-  padding: 32px;
+  padding: 32px 24px;
 }
 
-.section {
+.page > .section {
   scroll-margin-top: 32px;
-  padding: 32px;
+  padding: 24px;
 }
 
 .section-head {
-  gap: 32px;
+  gap: 24px;
   margin-bottom: 24px;
 }
 
@@ -237,7 +237,7 @@ html[data-sidebar="collapsed"] .docs-nav__summary .nav-icon {
   }
 
   .page-head,
-  .section {
+  .page > .section {
     padding: 24px 16px;
   }
 
