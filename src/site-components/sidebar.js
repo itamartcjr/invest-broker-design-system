@@ -16,12 +16,20 @@ function renderSidebar({ currentPath = 'index.html', prefix = './' } = {}) {
 <aside class="sidebar docs-sidebar" data-docs-sidebar>
   <div class="docs-sidebar__top">
     <a class="brand docs-sidebar__brand" href="${prefix}index.html" aria-label="CIIMO Design System">
-      <img class="docs-sidebar__brand-full" src="${prefix}assets/brand/ciimo-primary-dark.svg" alt="CIIMO">
-      <img class="docs-sidebar__brand-symbol" src="${prefix}assets/brand/ciimo-symbol-lime.svg" alt="" aria-hidden="true">
+      <img class="docs-sidebar__brand-full docs-sidebar__brand-full--dark" src="${prefix}assets/brand/ciimo_cw.svg" alt="CIIMO">
+      <img class="docs-sidebar__brand-full docs-sidebar__brand-full--light" src="${prefix}assets/brand/ciimo_cb.svg" alt="CIIMO">
+      <img class="docs-sidebar__brand-symbol docs-sidebar__brand-symbol--dark" src="${prefix}assets/brand/ii_v.svg" alt="" aria-hidden="true">
+      <img class="docs-sidebar__brand-symbol docs-sidebar__brand-symbol--light" src="${prefix}assets/brand/ii_b.svg" alt="" aria-hidden="true">
     </a>
-    <button class="docs-sidebar__toggle" type="button" data-sidebar-toggle aria-label="Expandir menu" aria-expanded="false" title="Expandir ou recolher menu">
-      <i class="hgi-stroke hgi-arrow-right-01" aria-hidden="true"></i>
-    </button>
+    <div class="docs-sidebar__actions">
+      <button class="docs-sidebar__theme" type="button" data-theme-toggle aria-label="Ativar tema claro" title="Ativar tema claro">
+        <i class="hgi-stroke hgi-sun-03 theme-icon--sun" aria-hidden="true"></i>
+        <i class="hgi-stroke hgi-moon-02 theme-icon--moon" aria-hidden="true"></i>
+      </button>
+      <button class="docs-sidebar__toggle" type="button" data-sidebar-toggle aria-label="Expandir menu" aria-expanded="false" title="Expandir ou recolher menu">
+        <i class="hgi-stroke hgi-arrow-right-01" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
   <span class="library-tag docs-sidebar__library">Design system</span>
   <nav class="docs-nav" aria-label="Navegação da documentação">
