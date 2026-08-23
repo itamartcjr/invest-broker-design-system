@@ -29,7 +29,7 @@ function themeBootScript() {
   return `<script>(function(){try{var t=localStorage.getItem('ciimo-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})();</script>`;
 }
 function styleLinks(prefix) {
-  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css">`;
+  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css">`;
 }
 function injectDocumentationScripts(html, prefix) {
   const scripts = `<script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script>`;
@@ -61,6 +61,7 @@ copy(path.join(root, 'catalog.js'), path.join(dist, 'catalog.js'));
 copy(path.join(root, 'src', 'docs.css'), path.join(dist, 'docs.css'));
 copy(path.join(root, 'src', 'theme.css'), path.join(dist, 'theme.css'));
 copy(path.join(root, 'src', 'refinement.css'), path.join(dist, 'refinement.css'));
+copy(path.join(root, 'src', 'color-semantics.css'), path.join(dist, 'color-semantics.css'));
 copy(path.join(root, 'src', 'docs.js'), path.join(dist, 'docs.js'));
 copyDir(path.join(root, 'assets', 'brand'), path.join(dist, 'assets', 'brand'));
 
