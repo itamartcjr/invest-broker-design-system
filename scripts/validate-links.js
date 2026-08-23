@@ -17,7 +17,7 @@ const documentationRoutes = new Set([
   'getting-started/sources.html',
 ]);
 const required = [
-  'index.html', 'styles.css', 'docs.css', 'theme.css', 'refinement.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
+  'index.html', 'styles.css', 'docs.css', 'theme.css', 'refinement.css', 'color-semantics.css', 'catalog.js', 'docs.js', '.nojekyll', 'branding.html',
   'assets/brand/ciimo_cw.svg',
   'assets/brand/ciimo_cb.svg',
   'assets/brand/ii_v.svg',
@@ -42,6 +42,22 @@ const themeCss = fs.readFileSync(path.join(dist, 'theme.css'), 'utf8');
 for (const contract of ['html[data-theme="light"]', '--bg: #f4f1ea', '--accent: #d4fb00', '.theme-preview--dark', '.theme-preview--light']) {
   if (!themeCss.includes(contract)) {
     console.error(`Contrato de tema ausente em theme.css: ${contract}`);
+    process.exit(1);
+  }
+}
+
+const colorSemanticsCss = fs.readFileSync(path.join(dist, 'color-semantics.css'), 'utf8');
+for (const contract of [
+  '--accent-content: #d4fb00',
+  '--accent-content: #5b6c00',
+  '--accent-focus: #5b6c00',
+  '.docs-nav__link.active',
+  '.input:focus',
+  'background: var(--accent)',
+  'color: var(--accent-text)',
+]) {
+  if (!colorSemanticsCss.includes(contract)) {
+    console.error(`Contrato semântico de cor ausente: ${contract}`);
     process.exit(1);
   }
 }
@@ -95,7 +111,7 @@ for (const entry of htmlFiles) {
     process.exit(1);
   }
 
-  for (const stylesheet of ['theme.css', 'refinement.css']) {
+  for (const stylesheet of ['theme.css', 'refinement.css', 'color-semantics.css']) {
     if (!html.includes(stylesheet)) {
       console.error(`Folha ${stylesheet} não encontrada em ${entry}`);
       process.exit(1);
@@ -164,7 +180,7 @@ if (!brandEssence.includes('Seu imóvel deixa de ser apenas uma compra')) {
 }
 
 const themePage = fs.readFileSync(path.join(dist, 'brand', 'theme.html'), 'utf8');
-for (const rule of ['#000000', '#F4F1EA', 'ciimo_cw.svg', 'ciimo_cb.svg', 'ii_v.svg', 'ii_b.svg', 'localStorage']) {
+for (const rule of ['#000000', '#F4F1EA', '#D4FB00', '#5B6C00', 'accent-content', 'ciimo_cw.svg', 'ciimo_cb.svg', 'ii_v.svg', 'ii_b.svg', 'localStorage']) {
   if (!themePage.includes(rule)) {
     console.error(`Documentação de tema incompleta: ${rule}`);
     process.exit(1);
@@ -179,4 +195,4 @@ for (const rule of ['Mais silêncio. Mais clareza.', '24 px', '32 px', '400', '5
   }
 }
 
-console.log(`Build válido: ${htmlFiles.length} páginas verificadas com Marca, princípios visuais, Light/Dark, App, Web e documentação.`);
+console.log(`Build válido: ${htmlFiles.length} páginas verificadas com Marca, contraste Light, princípios visuais, Light/Dark, App, Web e documentação.`);
