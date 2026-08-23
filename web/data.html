@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CIIMO Web - Dados</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="catalog">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html"><span class="brand-mark"><i></i><i></i></span><span class="brand-word">CIIMO</span></a><span class="library-tag">Web library</span>
+      <nav class="side-nav"><a href="index.html"><span class="nav-icon">01</span><span class="nav-text">Fundamentos</span></a><a href="forms.html"><span class="nav-icon">02</span><span class="nav-text">Formulários</span></a><a class="active" href="data.html"><span class="nav-icon">03</span><span class="nav-text">Dados</span></a><a href="patterns.html"><span class="nav-icon">04</span><span class="nav-text">Padrões</span></a><a href="screens.html"><span class="nav-icon">05</span><span class="nav-text">Telas</span></a></nav>
+      <div class="side-foot"><a href="../app/data.html">Abrir dados do app</a></div>
+    </aside>
+    <main class="page">
+      <header class="page-head"><div><span class="eyebrow">CIIMO / web / dados</span><h1>Conta, planos e transações.</h1><p>Padrões de leitura para assinatura, comparação de planos, recibos e histórico financeiro do site.</p></div><div class="page-index">01 — Resumo<br>02 — Assinatura<br>03 — Tabelas<br>04 — Estados</div></header>
+
+      <section class="section"><div class="section-head"><div><span class="section-no">01 / Resumo</span><h2>Indicadores da conta</h2></div><p>Uma única faixa reúne o estado atual antes de apresentar detalhes.</p></div><div class="specimen"><div class="specimen-label"><span>Account stats</span><code>responsive strip</code></div><div class="stat-strip"><div><small>Plano</small><strong>Essencial</strong></div><div><small>Status</small><strong>Ativa</strong></div><div><small>Valor</small><strong>R$ 10,00</strong></div><div><small>Periodicidade</small><strong>Mensal</strong></div><div><small>Próxima cobrança</small><strong>22/09</strong></div><div><small>Pagamento</small><strong>Cartão •••• 2042</strong></div></div></div></section>
+
+      <section class="section"><div class="section-head"><div><span class="section-no">02 / Assinatura</span><h2>Seções abertas</h2></div><p>Divisores, tipografia e espaço substituem grandes caixas no histórico da conta.</p></div><div class="specimen"><div class="specimen-label"><span>Subscription detail</span><code>active / pending / canceled</code></div><div class="open-section"><div class="card-top"><div><span class="eyebrow">Assinatura atual</span><h2>CIIMO Essencial</h2><p>Acompanhamento mensal do patrimônio imobiliário.</p></div><span class="chip success">Ativa</span></div></div><div class="open-section"><div class="grid grid-3"><div><span class="meta-label">Início</span><h3>22/08/2026</h3></div><div><span class="meta-label">Renovação</span><h3>22/09/2026</h3></div><div><span class="meta-label">Total mensal</span><h3>R$ 10,00</h3></div></div></div><div class="open-section"><div class="cluster"><button class="btn primary">Trocar plano</button><button class="btn">Atualizar pagamento</button><button class="btn danger">Cancelar assinatura</button></div></div></div></section>
+
+      <section class="section"><div class="section-head"><div><span class="section-no">03 / Tabelas</span><h2>Planos e pagamentos</h2></div><p>Comparação mantém recursos nas linhas; histórico prioriza status, data e total.</p></div>
+        <div class="specimen"><div class="specimen-label"><span>Pricing comparison</span><code>sticky first column</code></div><div class="table-wrap"><table class="comparison-table"><thead><tr><th>Recurso</th><th>Essencial</th><th>Corretor</th><th>Imobiliária</th></tr></thead><tbody><tr><td><strong>Carteira acompanhada</strong></td><td>1</td><td>Até 50</td><td>Ilimitada</td></tr><tr><td><strong>Mercado imobiliário</strong></td><td>Incluído</td><td>Incluído</td><td>Incluído</td></tr><tr><td><strong>Simulações</strong></td><td>3 / mês</td><td>Ilimitadas</td><td>Ilimitadas</td></tr><tr><td><strong>Equipe</strong></td><td>—</td><td>1 corretor</td><td>Até 20</td></tr></tbody></table></div></div>
+        <div class="specimen"><div class="specimen-label"><span>Payment history</span><code>table / compact mobile</code></div><div class="table-wrap"><table><thead><tr><th>Data</th><th>Descrição</th><th>Método</th><th>Total</th><th>Status</th><th></th></tr></thead><tbody><tr><td>22/08/2026</td><td><strong>CIIMO Essencial</strong></td><td>Cartão •••• 2042</td><td>R$ 10,00</td><td><span class="chip success">Confirmado</span></td><td><a href="#">Recibo</a></td></tr><tr><td>22/07/2026</td><td><strong>CIIMO Essencial</strong></td><td>Pix Automático</td><td>R$ 10,00</td><td><span class="chip success">Confirmado</span></td><td><a href="#">Recibo</a></td></tr></tbody></table></div><div class="pagination" style="margin-top:18px"><span class="helper">2 pagamentos</span><div class="pagination-pages"><button class="icon-btn">←</button><span class="chip active">1</span><button class="icon-btn">→</button></div></div></div>
+        <div class="specimen"><div class="specimen-label"><span>Receipt</span><code>order summary</code></div><div class="receipt"><div><span>Plano</span><strong>CIIMO Essencial</strong></div><div><span>Subtotal</span><strong>R$ 10,00</strong></div><div><span>Desconto</span><strong>R$ 0,00</strong></div><div><span>Total pago</span><strong>R$ 10,00</strong></div><div><span>ID da transação</span><strong>MP-20260822-2042</strong></div></div></div>
+      </section>
+
+      <section class="section"><div class="section-head"><div><span class="section-no">04 / Estados</span><h2>Carregamento e ausência</h2></div><p>O retorno sempre explica a situação e oferece uma ação proporcional.</p></div><div class="grid grid-3"><div class="specimen"><span class="variant-title">Loading</span><div class="stack"><div class="skeleton" style="width:42%"></div><div class="skeleton" style="height:54px"></div><div class="skeleton" style="width:70%"></div></div></div><div class="specimen"><span class="variant-title">Sem assinatura</span><div class="empty"><div><h3>Nenhum plano contratado</h3><p>Escolha um plano para começar.</p><button class="btn primary">Ver planos</button></div></div></div><div class="specimen"><span class="variant-title">Pagamento pendente</span><div class="alert error"><strong>Confirmação em andamento</strong><p>Aguarde alguns instantes ou atualize o status.</p><button class="btn">Atualizar</button></div></div></div></section>
+    </main>
+  </div>
+</body>
+</html>

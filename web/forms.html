@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CIIMO Web - Formulários</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="catalog">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html"><span class="brand-mark"><i></i><i></i></span><span class="brand-word">CIIMO</span></a>
+      <span class="library-tag">Web library</span>
+      <nav class="side-nav">
+        <a href="index.html"><span class="nav-icon">01</span><span class="nav-text">Fundamentos</span></a>
+        <a class="active" href="forms.html"><span class="nav-icon">02</span><span class="nav-text">Formulários</span></a>
+        <a href="data.html"><span class="nav-icon">03</span><span class="nav-text">Dados</span></a>
+        <a href="patterns.html"><span class="nav-icon">04</span><span class="nav-text">Padrões</span></a>
+        <a href="screens.html"><span class="nav-icon">05</span><span class="nav-text">Telas</span></a>
+      </nav>
+      <div class="side-foot"><a href="../app/forms.html">Abrir formulários do app</a></div>
+    </aside>
+    <main class="page">
+      <header class="page-head"><div><span class="eyebrow">CIIMO / web / formulários</span><h1>Entrada, cadastro e pagamento.</h1><p>Campos e jornadas de conversão apresentados por anatomia, variante e estado, preservando a linguagem visual do site CIIMO.</p></div><div class="page-index">01 — Acesso<br>02 — Cadastro<br>03 — Checkout<br>04 — Estados</div></header>
+
+      <section class="section"><div class="section-head"><div><span class="section-no">01 / Acesso</span><h2>Login</h2></div><p>A composição divide contexto de produto e ação principal sem competir com o formulário.</p></div>
+        <div class="specimen"><div class="specimen-label"><span>Authentication split</span><code>desktop / mobile stack</code></div><div class="auth-split"><div class="auth-intro"><span class="eyebrow">Acesso CIIMO</span><h2>Seu patrimônio em perspectiva.</h2><p>Entre para acompanhar imóveis, projeções, oportunidades e negociações em um único lugar.</p><div class="stack" style="margin-top:34px"><div class="metric"><small>Carteira</small><strong>Visão consolidada</strong></div><div class="metric"><small>Mercado</small><strong>Imóveis e lançamentos</strong></div></div></div><form class="auth-form stack"><span class="eyebrow">Entrar</span><h3>Boas-vindas de volta</h3><div class="field"><label>Usuário ou e-mail</label><input class="input" value="cliente@exemplo.com"></div><div class="field"><label>Senha</label><input class="input" type="password" value="12345678"></div><button class="btn primary" type="button">Entrar</button><a href="#">Esqueci minha senha</a><a href="#">Criar uma conta</a></form></div><div class="anatomy"><div><b>01 Contexto</b><span>Benefício do acesso</span></div><div><b>02 Credenciais</b><span>Identificação e senha</span></div><div><b>03 Ação</b><span>Um CTA dominante</span></div><div><b>04 Recuperação</b><span>Rotas auxiliares</span></div></div></div>
+      </section>
+
+      <section class="section"><div class="section-head"><div><span class="section-no">02 / Cadastro</span><h2>Conta e perfil</h2></div><p>O papel da pessoa é explícito antes da coleta de dados, reduzindo ambiguidade entre investidor e corretor.</p></div>
+        <div class="specimen"><div class="specimen-label"><span>Registration form</span><code>client / manager</code></div><div class="cluster" style="margin-bottom:20px"><button class="chip active">Sou investidor</button><button class="chip">Sou corretor</button></div><div class="web-form-grid"><div class="field"><label>Nome</label><input class="input" placeholder="Seu nome completo"></div><div class="field"><label>E-mail</label><input class="input" placeholder="voce@email.com"></div><div class="field"><label>Telefone</label><input class="input" placeholder="(00) 00000-0000"></div><div class="field"><label>Usuário</label><input class="input" placeholder="seu.usuario"></div><div class="field"><label>Senha</label><input class="input" type="password" placeholder="Mínimo de 8 caracteres"></div><div class="field"><label>Confirmar senha</label><input class="input" type="password" placeholder="Repita sua senha"></div></div><div class="modal-actions"><button class="btn primary">Criar conta</button></div></div>
+      </section>
+
+      <section class="section"><div class="section-head"><div><span class="section-no">03 / Checkout</span><h2>Dados e pagamento</h2></div><p>O checkout concentra o formulário no único card principal e mantém o resumo em uma coluna aberta.</p></div>
+        <div class="specimen"><div class="specimen-label"><span>Checkout form</span><code>3 etapas / Mercado Pago</code></div><div class="checkout"><aside class="checkout-summary"><span class="eyebrow">Seu plano</span><h2>CIIMO Essencial</h2><p>Acompanhamento mensal do patrimônio imobiliário.</p><div class="plan-price">R$ 10,00 <small>/mês</small></div><div class="receipt"><div><span>Modalidade</span><strong>Mensal recorrente</strong></div><div><span>Processamento</span><strong>Mercado Pago</strong></div><div><span>Conta</span><strong>Investidor</strong></div></div></aside><div class="checkout-card"><div class="steps"><span class="step active">1 Informações</span><span class="step">2 Pagamento</span><span class="step">3 Concluído</span></div><h3>Complete as informações para continuar</h3><div class="web-form-grid"><div class="field"><label>Nome</label><input class="input" value="Itamar"></div><div class="field"><label>Sobrenome</label><input class="input" placeholder="Sobrenome"></div><div class="field"><label>E-mail</label><input class="input" placeholder="email@exemplo.com"></div><div class="field"><label>CPF</label><input class="input" placeholder="000.000.000-00"></div><div class="field"><label>CEP</label><input class="input" placeholder="00000-000"></div><div class="field"><label>Cidade / UF</label><input class="input" placeholder="Goiânia / GO"></div></div><div class="modal-actions"><button class="btn primary">Ir para pagamento</button></div></div></div></div>
+        <div class="specimen"><div class="specimen-label"><span>Payment method</span><code>card / automatic pix</code></div><div class="grid grid-2"><article class="card"><span class="eyebrow">Cartão</span><h3>Crédito recorrente</h3><p>Cobrança mensal protegida pelo Mercado Pago.</p><button class="btn primary">Selecionar cartão</button></article><article class="card"><span class="eyebrow">Pix Automático</span><h3>Débito autorizado</h3><p>Autorize uma vez e acompanhe as próximas cobranças.</p><button class="btn">Selecionar Pix</button></article></div></div>
+      </section>
+
+      <section class="section"><div class="section-head"><div><span class="section-no">04 / Estados</span><h2>Validação e retorno</h2></div><p>Mensagens explicam a correção esperada sem depender apenas da cor.</p></div><div class="control-showcase"><div class="field-state"><div class="field"><label>Padrão</label><input class="input" placeholder="Digite uma informação"></div><p class="helper">Texto de apoio opcional.</p></div><div class="field-state success"><div class="field"><label>Confirmado</label><input class="input" value="cliente@ciimo.com.br"></div><p class="helper">E-mail disponível.</p></div><div class="field-state error"><div class="field"><label>Com erro</label><input class="input" value="cliente@"></div><p class="helper">Digite um e-mail válido.</p></div></div></section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CIIMO App - Telas</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="native">
+<div class="catalog">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html"><span class="brand-mark"><i></i><i></i></span><span class="brand-word">CIIMO</span></a>
+    <span class="library-tag">App library</span>
+    <nav class="side-nav"><a href="index.html"><span class="nav-icon">01</span><span class="nav-text">Fundamentos</span></a><a href="entities.html"><span class="nav-icon">02</span><span class="nav-text">Entidades</span></a><a href="data.html"><span class="nav-icon">03</span><span class="nav-text">Dados</span></a><a href="forms.html"><span class="nav-icon">04</span><span class="nav-text">Formulários</span></a><a href="patterns.html"><span class="nav-icon">05</span><span class="nav-text">Padrões</span></a><a class="active" href="screens.html"><span class="nav-icon">06</span><span class="nav-text">Telas</span></a></nav>
+    <div class="side-foot">React Native / Expo<br>Sem sombras</div>
+  </aside>
+  <main class="page">
+    <header class="page-head"><div><span class="eyebrow">CIIMO / APP</span><h1>Telas compostas</h1><p>Referências completas montadas exclusivamente com padrões encontrados no aplicativo.</p></div><span class="chip">03 / Screens</span></header>
+
+    <section class="section"><div class="section-head"><div><span class="section-no">01 / Mercado</span><h2>Explorar empreendimentos</h2></div><p>Busca, filtros, indicadores e grade de imóveis em uma única composição.</p></div>
+      <div class="specimen"><div class="mini-shell"><aside class="mini-side"><span class="brand-mark"><i></i><i></i></span><button class="icon-btn">D</button><button class="icon-btn" style="background:var(--accent);color:#000">M</button><button class="icon-btn">L</button></aside><div class="mini-main">
+        <div class="screen-head"><div><span class="eyebrow">MERCADO</span><h2>Explorar mercado</h2></div><span class="avatar">VG</span></div>
+        <div class="grid grid-4"><div class="kpi"><small>Empreendimentos</small><strong>42</strong></div><div class="kpi"><small>Unidades</small><strong>883</strong></div><div class="kpi"><small>Construtoras</small><strong>16</strong></div><div class="kpi"><small>Tipologias</small><strong>252</strong></div></div>
+        <div class="card"><div class="form-row"><div class="field"><label>Buscar empreendimento</label><input class="input" placeholder="Digite o nome"></div><div class="field"><label>Construtora</label><select class="select"><option>Todas</option><option>Castel</option><option>SIM</option></select></div><div class="field"><label>Tipologia</label><select class="select"><option>Todas</option><option>Studio</option><option>2 quartos</option></select></div></div></div>
+        <div class="grid grid-5"><article class="property-card"><span class="eyebrow">CASTEL</span><h3>Nativ Parque Areiao</h3><p>63 unidades</p><strong>R$ 600.296</strong><div class="card-meta"><span>17–67 m²</span><span>Goiânia</span></div></article><article class="property-card"><span class="eyebrow">SIM</span><h3>140 Wellnees Marista</h3><p>61 unidades</p><strong>R$ 987.301</strong><div class="card-meta"><span>40–79 m²</span><span>Marista</span></div></article><article class="property-card"><span class="eyebrow">GPL</span><h3>Alma Home Senses</h3><p>3 unidades</p><strong>R$ 1.898.665</strong><div class="card-meta"><span>158–163 m²</span><span>Goiânia</span></div></article><article class="property-card"><span class="eyebrow">TRINUS</span><h3>Art Haus</h3><p>20 unidades</p><strong>R$ 505.243</strong><div class="card-meta"><span>53–55 m²</span><span>Setor Oeste</span></div></article><article class="property-card"><span class="eyebrow">TAPAJÓS</span><h3>Blume Apartments</h3><p>1 unidade</p><strong>R$ 1.571.407</strong><div class="card-meta"><span>120 m²</span><span>Goiânia</span></div></article></div>
+      </div></div></div>
+    </section>
+
+    <section class="section"><div class="section-head"><div><span class="section-no">02 / Carteira</span><h2>Gestão do corretor</h2></div><p>Resumo consultivo, clientes acompanhados e acesso direto às carteiras.</p></div>
+      <div class="specimen"><div class="mini-shell"><div class="mini-main">
+        <div class="screen-head"><div><span class="eyebrow">GESTÃO CONSULTIVA</span><h2>Valeria Gestora</h2></div><button class="btn primary">Adicionar cliente</button></div>
+        <div class="grid grid-5"><div class="kpi"><small>Clientes</small><strong>3</strong></div><div class="kpi"><small>Ativos</small><strong>7</strong></div><div class="kpi"><small>Total contratado</small><strong>R$ 3,9 mi</strong></div><div class="kpi"><small>Total pago</small><strong>R$ 1,05 mi</strong></div><div class="kpi"><small>Valor atual estimado</small><strong>R$ 4,02 mi</strong></div></div>
+        <div class="screen-head"><div><span class="eyebrow">CLIENTES ACOMPANHADOS</span><h3>Carteiras de clientes</h3></div><div class="tabs"><button class="btn tab active">Cards</button><button class="btn tab">Lista</button></div></div>
+        <div class="grid grid-4"><article class="client-card"><div class="card-title"><span class="avatar">AC</span><div><h3>Allan Cassimiro</h3><p>1 imóvel acompanhado</p></div></div><div class="client-metrics"><span><small>Contratado</small><strong>R$ 703.430</strong></span><span><small>Valorização estimada</small><strong class="positive">R$ 41.490</strong></span></div></article><article class="client-card"><div class="card-title"><span class="avatar">EG</span><div><h3>Edgar Guimarães</h3><p>2 imóveis acompanhados</p></div></div><div class="client-metrics"><span><small>Contratado</small><strong>R$ 1,05 mi</strong></span><span><small>Valorização estimada</small><strong class="positive">R$ 459 mil</strong></span></div></article><article class="client-card"><div class="card-title"><span class="avatar">LF</span><div><h3>Luciana Fictícia</h3><p>5 imóveis acompanhados</p></div></div><div class="client-metrics"><span><small>Contratado</small><strong>R$ 2,7 mi</strong></span><span><small>Valor atual</small><strong>R$ 3,36 mi</strong></span></div></article></div>
+      </div></div></div>
+    </section>
+
+    <section class="section"><div class="section-head"><div><span class="section-no">03 / Venda</span><h2>Adicionar venda</h2></div><p>Seleção do imóvel, tipologia e composição completa do fluxo de pagamento.</p></div>
+      <div class="specimen"><div class="mini-shell"><div class="mini-main"><div class="screen-head"><button class="icon-btn">←</button><h2>Adicionar venda</h2><span class="avatar">VG</span></div>
+        <div class="card"><div class="form-row"><div class="field"><label>Construtora</label><select class="select"><option>Castel</option></select></div><div class="field"><label>Empreendimento</label><select class="select"><option>Nativ Parque Areiao</option></select></div><div class="field"><label>Produto / unidade</label><select class="select"><option>2905 B</option></select></div><div class="field"><label>Tipologia</label><select class="select"><option>2Q 67,34 m²</option></select></div></div></div>
+        <div class="tabs"><button class="btn tab active">Ato</button><button class="btn tab">Entrada parcelada</button><button class="btn tab">Balões</button><button class="btn tab">Mensais</button><button class="btn tab">Anuais</button><button class="btn tab">Semestrais</button><button class="btn tab">Única</button><button class="btn tab">Financiamento</button></div>
+        <div class="grid grid-2"><div class="card"><span class="eyebrow">FLUXO</span><h3>Ato</h3><div class="form-row"><div class="field"><label>Rótulo</label><input class="input" value="Sinal"></div><div class="field"><label>Valor</label><input class="input" value="27.920,62"></div><div class="field"><label>Data</label><input class="input" value="21/05/2026"></div></div></div><aside class="sale-card"><span class="eyebrow">RESUMO ESTIMADO</span><h3>Nativ Parque Areiao · 2905 B</h3><dl><div><dt>Valor contratado</dt><dd>R$ 465.349,56</dd></div><div><dt>Mensais</dt><dd>44 × R$ 750,90</dd></div><div><dt>Financiamento</dt><dd>R$ 302.475,44</dd></div></dl><button class="btn primary wide">Registrar venda</button></aside></div>
+      </div></div></div>
+    </section>
+
+    <section class="section"><div class="section-head"><div><span class="section-no">04 / Mobile</span><h2>Carteira compacta</h2></div><p>Mesmos tokens e hierarquia adaptados a uma coluna e navegação inferior.</p></div>
+      <div class="specimen" style="display:flex;justify-content:center"><div class="phone"><div class="screen-head"><span class="brand-mark"><i></i><i></i></span><span class="avatar">AC</span></div><span class="eyebrow">CARTEIRA</span><h2>Seus imóveis</h2><div class="stack"><article class="property-card"><span class="eyebrow">NATIV PARQUE AREIAO</span><h3>Unidade 2905 B</h3><strong>R$ 465.349,56</strong><div class="card-meta"><span>67,34 m²</span><span>Em acompanhamento</span></div></article><article class="property-card"><span class="eyebrow">140 WELLNEES</span><h3>Unidade 1005</h3><strong>R$ 575.573,08</strong><div class="card-meta"><span>43,42 m²</span><span>Disponível</span></div></article></div><nav class="bottom-nav"><b>Carteira</b><span>Mercado</span><span>Perfil</span></nav></div></div>
+    </section>
+  </main>
+</div><script src="../catalog.js"></script></body></html>

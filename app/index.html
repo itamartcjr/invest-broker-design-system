@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CIIMO App - Fundamentos</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="native">
+  <div class="catalog">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html"><span class="brand-mark"><i></i><i></i></span><span class="brand-word">CIIMO</span></a>
+      <span class="library-tag">App library</span>
+      <nav class="side-nav">
+        <a class="active" href="index.html"><span class="nav-icon">01</span><span class="nav-text">Fundamentos</span></a>
+        <a href="entities.html"><span class="nav-icon">02</span><span class="nav-text">Entidades</span></a>
+        <a href="data.html"><span class="nav-icon">03</span><span class="nav-text">Dados</span></a>
+        <a href="forms.html"><span class="nav-icon">04</span><span class="nav-text">Formulários</span></a>
+        <a href="patterns.html"><span class="nav-icon">05</span><span class="nav-text">Padrões</span></a>
+        <a href="screens.html"><span class="nav-icon">06</span><span class="nav-text">Telas</span></a>
+      </nav>
+      <div class="side-foot"><a href="../web/index.html">Abrir biblioteca web</a><br><br>Fonte: invest-broker-app</div>
+    </aside>
+
+    <main class="page">
+      <header class="page-head">
+        <div><span class="eyebrow">CIIMO / aplicativo</span><h1>Fundamentos do produto.</h1><p>Tokens e elementos essenciais extraídos da interface real do aplicativo. A biblioteca nativa não usa sombras: hierarquia é construída com contraste, bordas, espaçamento e tipografia.</p></div>
+        <div class="page-index">01 — Cores<br>02 — Tipografia<br>03 — Espaçamento<br>04 — Ações<br>05 — Navegação</div>
+      </header>
+
+      <section class="section" id="cores">
+        <div class="section-head"><div><span class="section-no">01 / Cores</span><h2>Paleta funcional</h2></div><p>Preto absoluto como base, superfícies discretas e verde CIIMO para seleção e ação. Azul, dourado e vermelho aparecem apenas com significado.</p></div>
+        <div class="specimen"><div class="specimen-label"><span>Core tokens</span><code>native/theme.ts</code></div>
+          <div class="grid grid-4">
+            <div class="token"><div class="swatch" style="background:#000"></div><strong>Background</strong><small>#000000</small></div>
+            <div class="token"><div class="swatch" style="background:#111"></div><strong>Surface</strong><small>#111111</small></div>
+            <div class="token"><div class="swatch" style="background:#f4f1ea"></div><strong>Text</strong><small>#F4F1EA</small></div>
+            <div class="token"><div class="swatch" style="background:#d4fb00"></div><strong>Accent</strong><small>#D4FB00</small></div>
+            <div class="token"><div class="swatch" style="background:#ffc452"></div><strong>Gold</strong><small>#FFC452</small></div>
+            <div class="token"><div class="swatch" style="background:#4da3ff"></div><strong>Blue</strong><small>#4DA3FF</small></div>
+            <div class="token"><div class="swatch" style="background:#5ee09b"></div><strong>Success</strong><small>#5EE09B</small></div>
+            <div class="token"><div class="swatch" style="background:#ff8b8b"></div><strong>Danger</strong><small>#FF8B8B</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="tipografia">
+        <div class="section-head"><div><span class="section-no">02 / Tipografia</span><h2>Escala editorial</h2></div><p>Títulos fortes e compactos, rótulos técnicos em caixa alta e textos auxiliares com contraste reduzido.</p></div>
+        <div class="specimen"><div class="specimen-label"><span>Type ramp</span><span>peso 400–900</span></div>
+          <div class="type-sample"><span class="meta-label">Display / 48</span><div class="type-display">Patrimônio em perspectiva.</div></div>
+          <div class="type-sample"><span class="meta-label">Título / 29</span><div class="type-title">Nativ Parque Areião</div></div>
+          <div class="type-sample"><span class="meta-label">Seção / 17</span><h3>Valorização patrimonial</h3></div>
+          <div class="type-sample"><span class="type-label">Rótulo / 12 — Valor atual aproximado</span></div>
+          <div class="type-sample"><p>Texto de apoio informa contexto, origem e natureza aproximada das projeções.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="espacamento">
+        <div class="section-head"><div><span class="section-no">03 / Espaçamento</span><h2>Ritmo e forma</h2></div><p>Escala curta baseada em 6, 10, 16, 24 e 32. Raios maiores são reservados para containers e cartões principais.</p></div>
+        <div class="grid grid-2">
+          <div class="specimen"><div class="specimen-label"><span>Spacing scale</span><code>xs → xl</code></div><div class="stack">
+            <div class="spacing-row"><code>06</code><span class="spacing-bar" style="width:24px"></span><span>micro</span></div>
+            <div class="spacing-row"><code>10</code><span class="spacing-bar" style="width:40px"></span><span>compacto</span></div>
+            <div class="spacing-row"><code>16</code><span class="spacing-bar" style="width:64px"></span><span>padrão</span></div>
+            <div class="spacing-row"><code>24</code><span class="spacing-bar" style="width:96px"></span><span>seção</span></div>
+            <div class="spacing-row"><code>32</code><span class="spacing-bar" style="width:128px"></span><span>macro</span></div>
+          </div></div>
+          <div class="specimen"><div class="specimen-label"><span>Radius scale</span><code>14 / 16 / 24 / pill</code></div><div class="grid grid-2">
+            <div class="token" style="border-radius:14px"><strong>Small</strong><small>inputs</small></div>
+            <div class="token" style="border-radius:16px"><strong>Medium</strong><small>métricas</small></div>
+            <div class="token" style="border-radius:24px"><strong>Large</strong><small>cards</small></div>
+            <div class="token" style="border-radius:999px"><strong>Pill</strong><small>ações</small></div>
+          </div></div>
+        </div>
+      </section>
+
+      <section class="section" id="acoes">
+        <div class="section-head"><div><span class="section-no">04 / Ações</span><h2>Controles essenciais</h2></div><p>Controles mantêm altura tátil mínima e estados claros. O verde é reservado à ação principal ou seleção corrente.</p></div>
+        <div class="specimen"><div class="specimen-label"><span>Buttons, chips & avatars</span><span>touch target ≥ 44</span></div>
+          <div class="cluster"><button class="btn primary">Adicionar venda</button><button class="btn">Voltar</button><button class="btn danger">Excluir</button><button class="btn" disabled>Indisponível</button><button class="icon-btn">←</button><span class="avatar">VG</span></div>
+          <div class="cluster" style="margin-top:20px"><span class="chip active">Disponível</span><span class="chip">Vendido</span><span class="chip success">Confirmado</span><span class="chip danger">Atenção</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="navegacao">
+        <div class="section-head"><div><span class="section-no">05 / Navegação</span><h2>Estrutura do app</h2></div><p>Menu lateral no desktop e barra compacta no celular. O título permanece centralizado, com voltar à esquerda e conta à direita.</p></div>
+        <div class="grid grid-2">
+          <div class="specimen"><div class="specimen-label"><span>Sidebar compacta</span><span>desktop</span></div><div class="mini-shell" style="min-height:360px"><div class="mini-side"><span class="brand-mark"><i></i><i></i></span><span class="nav-icon">D</span><span class="nav-icon" style="color:var(--accent)">M</span><span class="nav-icon">L</span></div><div class="mini-main"><div class="screen-head"><button class="icon-btn">←</button><h3>Explorar mercado</h3><div class="right"><span class="avatar">VG</span></div></div><p>Navegação fixa e conteúdo independente.</p></div></div></div>
+          <div class="specimen"><div class="specimen-label"><span>Header de contexto</span><span>mobile / desktop</span></div><div class="screen-head"><button class="icon-btn">←</button><h3>Adicionar venda</h3><div class="right"><button class="btn primary">Salvar</button><span class="avatar">VG</span></div></div><div class="bottom-nav"><span>Dashboard</span><span class="active">Mercado</span><span>Lançamentos</span><span>Conta</span></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
