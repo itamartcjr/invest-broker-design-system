@@ -29,6 +29,11 @@ const navigation = [
       { key: 'foundation-colors', label: 'Colors', href: 'foundations/colors.html' },
       { key: 'foundation-typography', label: 'Typography', href: 'foundations/typography.html' },
       { key: 'foundation-spacing', label: 'Spacing & Layout', href: 'foundations/spacing-layout.html' },
+      { key: 'foundation-grid', label: 'Grid', href: 'foundations/grid.html' },
+      { key: 'foundation-breakpoints', label: 'Breakpoints', href: 'foundations/breakpoints.html' },
+      { key: 'foundation-radius', label: 'Radius', href: 'foundations/radius.html' },
+      { key: 'foundation-borders', label: 'Borders', href: 'foundations/borders.html' },
+      { key: 'foundation-elevation', label: 'Elevation', href: 'foundations/elevation.html' },
       { key: 'foundation-icons', label: 'Icons', href: 'getting-started/icons.html' },
       { key: 'foundation-theme', label: 'Light & Dark', href: 'brand/theme.html' },
       { key: 'foundation-motion', label: 'Motion', href: 'foundations/motion.html' },
@@ -50,6 +55,11 @@ const navigation = [
     short: '04',
     items: [
       { key: 'components-overview', label: 'Inventory', href: 'components/index.html' },
+      { key: 'components-buttons', label: 'Buttons', href: 'components/buttons.html' },
+      { key: 'components-fields', label: 'Fields', href: 'components/fields.html' },
+      { key: 'components-data', label: 'Data Display', href: 'components/data-display.html' },
+      { key: 'components-feedback', label: 'Feedback & Loading', href: 'components/feedback-loading.html' },
+      { key: 'components-navigation', label: 'Navigation', href: 'components/navigation.html' },
     ],
   },
   {
@@ -58,6 +68,16 @@ const navigation = [
     short: '05',
     items: [
       { key: 'pattern-investment-reading', label: 'Leitura de investimento', href: 'patterns/investment-reading.html' },
+      { key: 'pattern-filter-compare', label: 'Filter & Compare', href: 'patterns/filter-compare.html' },
+      { key: 'pattern-continuity', label: 'Acompanhamento contínuo', href: 'patterns/continuity.html' },
+    ],
+  },
+  {
+    key: 'templates',
+    title: 'Templates',
+    short: '06',
+    items: [
+      { key: 'templates-overview', label: 'Product structures', href: 'templates/index.html' },
     ],
   },
   {
