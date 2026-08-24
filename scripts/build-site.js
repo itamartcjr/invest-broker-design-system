@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { renderSidebar } = require('../src/site-components/sidebar');
 const { renderTopbar } = require('../src/site-components/topbar');
-const { documentationPages } = require('../src/site-pages');
+const { documentationPages } = require('../src/all-pages');
 const { themePage } = require('../src/theme-page');
 const { visualPrinciplesPage } = require('../src/visual-principles-page');
 const { responsivePage } = require('../src/responsive-page');
@@ -33,7 +33,7 @@ function themeBootScript() {
   return `<script>(function(){try{var t=localStorage.getItem('ciimo-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})();</script>`;
 }
 function styleLinks(prefix) {
-  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css"><link rel="stylesheet" href="${prefix}shell-refinement.css">`;
+  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css"><link rel="stylesheet" href="${prefix}shell-refinement.css"><link rel="stylesheet" href="${prefix}brand-framework.css">`;
 }
 function shellChrome(route, prefix) {
   return `${renderSidebar({ currentPath: route, prefix })}<div class="docs-backdrop" data-sidebar-backdrop aria-hidden="true"></div>${renderTopbar({ currentPath: route })}`;
@@ -72,6 +72,7 @@ copy(path.join(root, 'src', 'refinement.css'), path.join(dist, 'refinement.css')
 copy(path.join(root, 'src', 'color-semantics.css'), path.join(dist, 'color-semantics.css'));
 copy(path.join(root, 'src', 'mobile.css'), path.join(dist, 'mobile.css'));
 copy(path.join(root, 'src', 'shell-refinement.css'), path.join(dist, 'shell-refinement.css'));
+copy(path.join(root, 'src', 'brand-framework.css'), path.join(dist, 'brand-framework.css'));
 copy(path.join(root, 'src', 'docs.js'), path.join(dist, 'docs.js'));
 copy(path.join(root, 'src', 'brand-nav.js'), path.join(dist, 'brand-nav.js'));
 copyDir(path.join(root, 'assets', 'brand'), path.join(dist, 'assets', 'brand'));
