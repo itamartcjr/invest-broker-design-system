@@ -4,6 +4,7 @@ const { createDesignSystemPages } = require('./design-system-pages');
 const { createExtraDesignSystemPages } = require('./design-system-extra-pages');
 const { homePage } = require('./home-page');
 const { designSystemOverviewPage } = require('./design-system-overview-page');
+const { assetPerformanceHeaderPage } = require('./asset-performance-header-page');
 
 const legacyPages = Object.fromEntries(
   Object.entries(sourceLegacyPages).filter(([route]) => !route.startsWith('brand/'))
@@ -24,12 +25,14 @@ const designSystemPages = createDesignSystemPages({ shellContent, section });
 const extraDesignSystemPages = createExtraDesignSystemPages({ shellContent, section });
 const home = homePage({ shellContent, section });
 const designSystemOverview = designSystemOverviewPage({ shellContent, section });
+const assetPerformanceHeader = assetPerformanceHeaderPage({ shellContent, section });
 
 const documentationPages = {
   ...legacyPages,
   ...brandFrameworkPages,
   ...designSystemPages,
   ...extraDesignSystemPages,
+  [assetPerformanceHeader.route]: assetPerformanceHeader.page,
   [home.route]: home.page,
   [designSystemOverview.route]: designSystemOverview.page,
 };
