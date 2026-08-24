@@ -88,4 +88,7 @@ write(path.join(dist, visualPrinciplesPage.route), renderDocumentationPage(visua
 write(path.join(dist, responsivePage.route), renderDocumentationPage(responsivePage.route, responsivePage.page));
 write(path.join(dist, howToUsePage.route), renderDocumentationPage(howToUsePage.route, howToUsePage.page));
 write(path.join(dist, 'branding.html'), redirectDocument('./brand/index.html', 'CIIMO Brand'));
+for (const oldBrandRoute of ['positioning.html', 'personality.html', 'experience.html', 'identity.html']) {
+  write(path.join(dist, 'brand', oldBrandRoute), redirectDocument('./index.html', 'CIIMO Brand'));
+}
 write(path.join(dist, '.nojekyll'), '');

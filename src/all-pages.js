@@ -1,9 +1,13 @@
-const { documentationPages: legacyPages } = require('./site-pages');
+const { documentationPages: sourceLegacyPages } = require('./site-pages');
 const { brandFrameworkPages } = require('./brand/framework-pages');
 const { createDesignSystemPages } = require('./design-system-pages');
 const { createExtraDesignSystemPages } = require('./design-system-extra-pages');
 const { homePage } = require('./home-page');
 const { designSystemOverviewPage } = require('./design-system-overview-page');
+
+const legacyPages = Object.fromEntries(
+  Object.entries(sourceLegacyPages).filter(([route]) => !route.startsWith('brand/'))
+);
 
 function shellContent({ eyebrow, title, description, index = [], sections = [] }) {
   return `<main class="page docs-page">

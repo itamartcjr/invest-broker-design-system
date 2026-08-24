@@ -117,16 +117,21 @@ for (const rule of [brandBook.essence, brandBook.promise, brandBook.positioning.
 }
 
 const brandMetaPhrases = [
-  'Para que serve',
+  '01 / Para que serve',
   'Decisão que esta página orienta',
+  '02 / Evidência',
   'De onde esta decisão vem',
-  'Decisão CIIMO',
+  '03 / Decisão CIIMO',
   'Esta é a resposta específica da CIIMO',
   'não é texto de exemplo do framework de referência',
-  'Como executar',
-  'Governança',
+  '05 / Como executar',
+  '06 / Governança',
   'Pergunta de construção',
 ];
+
+for (const phrase of brandMetaPhrases) {
+  if (brandOverview.includes(phrase)) fail(`Texto de framework não permitido no Brand Book: ${phrase}`);
+}
 
 if (brandGroup.items.length < 70) fail(`Cobertura de Brand insuficiente: ${brandGroup.items.length} páginas.`);
 for (const module of brandFramework.modules) {
@@ -145,6 +150,11 @@ for (const module of brandFramework.modules) {
 
 for (const route of ['foundations/grid.html', 'foundations/breakpoints.html', 'foundations/radius.html', 'foundations/borders.html', 'foundations/elevation.html', 'components/buttons.html', 'components/fields.html', 'components/data-display.html', 'components/feedback-loading.html', 'components/navigation.html', 'patterns/investment-reading.html', 'patterns/filter-compare.html', 'patterns/continuity.html', 'templates/index.html', 'examples/audience-modes.html']) {
   if (!designGroup.items.some((item) => item.href === route)) fail(`Página do Design System fora da navegação: ${route}`);
+}
+
+for (const oldBrandRoute of ['brand/positioning.html', 'brand/personality.html', 'brand/experience.html', 'brand/identity.html']) {
+  const html = read(oldBrandRoute);
+  if (!html.includes('url=./index.html')) fail(`Rota antiga da Brand deve redirecionar para o Brand Book: ${oldBrandRoute}`);
 }
 
 console.log(`Build válido: Brand editorial com ${brandFramework.modules.length} módulos e Design System separado com App/Web.`);
