@@ -7,6 +7,7 @@ const { themePage } = require('../src/theme-page');
 const { visualPrinciplesPage } = require('../src/visual-principles-page');
 const { responsivePage } = require('../src/responsive-page');
 const { howToUsePage } = require('../src/how-to-use-page');
+const { brandOverviewPage } = require('../src/brand/brand-overview-page');
 
 const root = process.cwd();
 const dist = path.join(root, 'dist');
@@ -32,16 +33,17 @@ function themeBootScript() {
   return `<script>(function(){try{var t=localStorage.getItem('ciimo-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})();</script>`;
 }
 function styleLinks(prefix) {
-  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css">`;
+  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css"><link rel="stylesheet" href="${prefix}shell-refinement.css">`;
 }
 function shellChrome(route, prefix) {
   return `${renderSidebar({ currentPath: route, prefix })}<div class="docs-backdrop" data-sidebar-backdrop aria-hidden="true"></div>${renderTopbar({ currentPath: route })}`;
 }
 function injectDocumentationScripts(html, prefix) {
-  const scripts = `<script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script>`;
+  const scripts = `<script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script><script src="${prefix}brand-nav.js"></script>`;
   return html
     .replace(/<script src="[^"]*catalog\.js"><\/script>/g, '')
     .replace(/<script src="[^"]*docs\.js"><\/script>/g, '')
+    .replace(/<script src="[^"]*brand-nav\.js"><\/script>/g, '')
     .replace(/<\/body>/, `${scripts}</body>`);
 }
 function transformExistingPage(html, route) {
@@ -55,7 +57,7 @@ function transformExistingPage(html, route) {
 }
 function renderDocumentationPage(route, page) {
   const prefix = prefixFor(route);
-  return `<!doctype html><html lang="pt-BR" data-sidebar="collapsed" data-theme="dark"><head>${themeBootScript()}<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${page.title}</title><meta name="description" content="Documentação do CIIMO Design System"><link rel="icon" href="${prefix}assets/brand/favicon.svg">${styleLinks(prefix)}</head><body class="native"><div class="catalog">${shellChrome(route, prefix)}${page.html}</div><script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script></body></html>`;
+  return `<!doctype html><html lang="pt-BR" data-sidebar="collapsed" data-theme="dark"><head>${themeBootScript()}<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${page.title}</title><meta name="description" content="Documentação do CIIMO Design System"><link rel="icon" href="${prefix}assets/brand/favicon.svg">${styleLinks(prefix)}</head><body class="native"><div class="catalog">${shellChrome(route, prefix)}${page.html}</div><script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script><script src="${prefix}brand-nav.js"></script></body></html>`;
 }
 function redirectDocument(target, title) {
   return `<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0; url=${target}"><title>${title}</title></head><body><p>Esta página mudou. <a href="${target}">Continuar</a>.</p></body></html>`;
@@ -69,7 +71,9 @@ copy(path.join(root, 'src', 'theme.css'), path.join(dist, 'theme.css'));
 copy(path.join(root, 'src', 'refinement.css'), path.join(dist, 'refinement.css'));
 copy(path.join(root, 'src', 'color-semantics.css'), path.join(dist, 'color-semantics.css'));
 copy(path.join(root, 'src', 'mobile.css'), path.join(dist, 'mobile.css'));
+copy(path.join(root, 'src', 'shell-refinement.css'), path.join(dist, 'shell-refinement.css'));
 copy(path.join(root, 'src', 'docs.js'), path.join(dist, 'docs.js'));
+copy(path.join(root, 'src', 'brand-nav.js'), path.join(dist, 'brand-nav.js'));
 copyDir(path.join(root, 'assets', 'brand'), path.join(dist, 'assets', 'brand'));
 
 for (const area of ['app', 'web']) {
@@ -89,5 +93,6 @@ write(path.join(dist, themePage.route), renderDocumentationPage(themePage.route,
 write(path.join(dist, visualPrinciplesPage.route), renderDocumentationPage(visualPrinciplesPage.route, visualPrinciplesPage.page));
 write(path.join(dist, responsivePage.route), renderDocumentationPage(responsivePage.route, responsivePage.page));
 write(path.join(dist, howToUsePage.route), renderDocumentationPage(howToUsePage.route, howToUsePage.page));
+write(path.join(dist, brandOverviewPage.route), renderDocumentationPage(brandOverviewPage.route, brandOverviewPage.page));
 write(path.join(dist, 'branding.html'), redirectDocument('./brand/identity.html', 'Identidade visual · CIIMO Design System'));
 write(path.join(dist, '.nojekyll'), '');
