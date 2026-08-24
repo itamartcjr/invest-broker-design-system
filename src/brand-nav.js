@@ -4,6 +4,7 @@
 
   const search = sidebar.querySelector('[data-nav-search]');
   const modules = [...sidebar.querySelectorAll('[data-nav-module]')];
+  const frameworkGroups = [...sidebar.querySelectorAll('[data-framework-group]')];
   const groups = [...sidebar.querySelectorAll('[data-nav-group]')];
 
   const keyFor = (module) => `ciimo-docs-module-${module.dataset.navModule}`;
@@ -16,6 +17,13 @@
     });
   });
 
+  const syncFrameworkGroups = () => {
+    frameworkGroups.forEach((frameworkGroup) => {
+      const visibleModule = [...frameworkGroup.querySelectorAll('[data-nav-module]')].some((module) => !module.hidden);
+      frameworkGroup.hidden = !visibleModule;
+    });
+  };
+
   const syncModulesToSearch = () => {
     const term = search?.value.trim().toLowerCase() || '';
 
@@ -24,16 +32,19 @@
       if (!term) {
         module.hidden = false;
         module.open = readState(module);
+        links.forEach((link) => { link.hidden = false; });
         return;
       }
 
-      const moduleText = module.querySelector('.docs-nav__module-summary')?.textContent?.toLowerCase() || '';
+      const moduleText = `${module.dataset.moduleGroup || ''} ${module.querySelector('.docs-nav__module-summary')?.textContent || ''}`.toLowerCase();
       const moduleMatch = moduleText.includes(term);
       if (moduleMatch) links.forEach((link) => { link.hidden = false; });
       const visibleLinks = links.filter((link) => !link.hidden);
       module.hidden = !moduleMatch && visibleLinks.length === 0;
       module.open = !module.hidden;
     });
+
+    syncFrameworkGroups();
 
     if (term) {
       groups.forEach((group) => {
@@ -44,6 +55,8 @@
           group.open = true;
         }
       });
+    } else {
+      frameworkGroups.forEach((frameworkGroup) => { frameworkGroup.hidden = false; });
     }
   };
 
