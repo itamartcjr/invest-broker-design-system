@@ -1,6 +1,7 @@
 const { documentationPages: legacyPages } = require('./site-pages');
 const { brandFrameworkPages } = require('./brand/framework-pages');
 const { createDesignSystemPages } = require('./design-system-pages');
+const { createExtraDesignSystemPages } = require('./design-system-extra-pages');
 
 function shellContent({ eyebrow, title, description, index = [], sections = [] }) {
   return `<main class="page docs-page">
@@ -14,11 +15,13 @@ function section(number, label, title, description, body) {
 }
 
 const designSystemPages = createDesignSystemPages({ shellContent, section });
+const extraDesignSystemPages = createExtraDesignSystemPages({ shellContent, section });
 
 const documentationPages = {
   ...legacyPages,
   ...brandFrameworkPages,
   ...designSystemPages,
+  ...extraDesignSystemPages,
 };
 
 module.exports = { documentationPages };
