@@ -1,0 +1,42 @@
+/* Group → module → item hierarchy for the CIIMO Brand Framework sidebar. */
+
+.docs-nav__framework-group {
+  display: grid;
+  gap: 2px;
+  margin-top: 14px;
+}
+
+.docs-nav__framework-group[hidden] {
+  display: none;
+}
+
+.docs-nav__framework-label {
+  display: block;
+  padding: 8px 10px 4px 14px;
+  color: var(--muted);
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.docs-nav__framework-group + .docs-nav__framework-group {
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px solid var(--separator);
+}
+
+html[data-sidebar="collapsed"] .docs-nav__framework-group {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  html[data-sidebar="collapsed"] .docs-nav__framework-group,
+  html[data-sidebar="expanded"] .docs-nav__framework-group {
+    display: grid;
+  }
+
+  .docs-nav__framework-label {
+    padding-left: 8px;
+  }
+}
