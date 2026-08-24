@@ -20,7 +20,8 @@ function moduleCard(number, title, description, items) {
   </article>`;
 }
 
-const brandOverviewHtml = `<main class="page docs-page brand-framework-overview">
+const brandOverviewHtml = `<main class="page docs-page">
+<div class="brand-framework-overview">
   <header class="brand-framework-hero">
     <div>
       <span class="eyebrow">CIIMO / Brand Framework</span>
@@ -72,6 +73,7 @@ const brandOverviewHtml = `<main class="page docs-page brand-framework-overview"
       <div class="metric"><small>4</small><strong>Referências externas</strong></div>
     </div>
   </section>
+</div>
 </main>`;
 
 const brandOverviewPage = {
