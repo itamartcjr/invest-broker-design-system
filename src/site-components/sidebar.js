@@ -13,7 +13,7 @@ function renderSidebar({ currentPath = 'index.html', prefix = './' } = {}) {
   const { item: currentItem } = itemForPath(currentPath);
 
   return `
-<aside class="sidebar docs-sidebar" data-docs-sidebar>
+<aside class="sidebar docs-sidebar" data-docs-sidebar aria-label="Navegação do Design System">
   <div class="docs-sidebar__top">
     <a class="brand docs-sidebar__brand" href="${prefix}index.html" aria-label="CIIMO Design System">
       <img class="docs-sidebar__brand-full docs-sidebar__brand-full--dark" src="${prefix}assets/brand/ciimo_cw.svg" alt="CIIMO">
@@ -21,17 +21,21 @@ function renderSidebar({ currentPath = 'index.html', prefix = './' } = {}) {
       <img class="docs-sidebar__brand-symbol docs-sidebar__brand-symbol--dark" src="${prefix}assets/brand/ii_v.svg" alt="" aria-hidden="true">
       <img class="docs-sidebar__brand-symbol docs-sidebar__brand-symbol--light" src="${prefix}assets/brand/ii_b.svg" alt="" aria-hidden="true">
     </a>
-    <div class="docs-sidebar__actions">
-      <button class="docs-sidebar__theme" type="button" data-theme-toggle aria-label="Ativar tema claro" title="Ativar tema claro">
-        <i class="hgi-stroke hgi-sun-03 theme-icon--sun" aria-hidden="true"></i>
-        <i class="hgi-stroke hgi-moon-02 theme-icon--moon" aria-hidden="true"></i>
-      </button>
-      <button class="docs-sidebar__toggle" type="button" data-sidebar-toggle aria-label="Expandir menu" aria-expanded="false" title="Expandir ou recolher menu">
-        <i class="hgi-stroke hgi-arrow-right-01" aria-hidden="true"></i>
-      </button>
-    </div>
+    <button class="docs-sidebar__close" type="button" data-sidebar-close aria-label="Fechar menu" title="Fechar menu">
+      <i class="hgi-stroke hgi-cancel-01" aria-hidden="true"></i>
+    </button>
+    <button class="docs-sidebar__toggle" type="button" data-sidebar-toggle aria-label="Expandir menu" aria-expanded="false" title="Expandir ou recolher menu">
+      <i class="hgi-stroke hgi-arrow-right-01" aria-hidden="true"></i>
+    </button>
   </div>
-  <span class="library-tag docs-sidebar__library">Design system</span>
+
+  <div class="docs-sidebar__search">
+    <label>
+      <i class="hgi-stroke hgi-search-01" aria-hidden="true"></i>
+      <input type="search" data-nav-search placeholder="Buscar páginas" aria-label="Buscar no Design System" autocomplete="off">
+    </label>
+  </div>
+
   <nav class="docs-nav" aria-label="Navegação da documentação">
     ${navigation.map((group) => `
       <details class="docs-nav__group" data-nav-group="${escapeHtml(group.key)}">
@@ -43,14 +47,15 @@ function renderSidebar({ currentPath = 'index.html', prefix = './' } = {}) {
         <div class="docs-nav__links">
           ${group.items.map((item) => {
             const active = item.key === currentItem.key;
-            return `<a class="docs-nav__link${active ? ' active' : ''}" href="${prefix}${item.href}"${active ? ' aria-current="page"' : ''}><span>${escapeHtml(item.label)}</span></a>`;
+            return `<a class="docs-nav__link${active ? ' active' : ''}" href="${prefix}${item.href}" data-group-label="${escapeHtml(group.title)}" data-page-label="${escapeHtml(item.label)}"${active ? ' aria-current="page"' : ''}><span>${escapeHtml(item.label)}</span></a>`;
           }).join('')}
         </div>
       </details>`).join('')}
   </nav>
+
   <div class="side-foot docs-sidebar__foot">
-    <a href="https://github.com/itamartcjr/invest-broker-design-system">GitHub</a>
-    <span>Node · GitHub Pages</span>
+    <a href="${prefix}getting-started/how-to-use.html">Como usar o sistema</a>
+    <span>CIIMO · Node · GitHub Pages</span>
   </div>
 </aside>`;
 }
