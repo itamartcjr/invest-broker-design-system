@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { navigation } = require('../src/navigation');
+const { systemAuthority } = require('../src/system-authority');
 
 const dist = path.join(process.cwd(), 'dist');
 const documentationRoutes = new Set([
@@ -12,6 +13,7 @@ const documentationRoutes = new Set([
   'brand/visual-principles.html',
   'brand/identity.html',
   'brand/theme.html',
+  'getting-started/how-to-use.html',
   'getting-started/coverage.html',
   'getting-started/responsive.html',
   'getting-started/icons.html',
@@ -25,6 +27,23 @@ const required = [
   'assets/brand/ii_b.svg',
   ...navigation.flatMap((group) => group.items.map((item) => item.href)),
 ];
+
+if (systemAuthority.documentationReference.role !== 'documentation-framework-only') {
+  console.error('A referência externa não pode assumir autoridade visual sobre o CIIMO.');
+  process.exit(1);
+}
+for (const forbidden of ['cores', 'tipografia', 'motion e easing', 'aparência de componentes', 'comportamento responsivo']) {
+  if (!systemAuthority.referenceCannotDefine.includes(forbidden)) {
+    console.error(`Contrato de autoridade visual incompleto: ${forbidden}`);
+    process.exit(1);
+  }
+}
+for (const step of ['Título', 'Descrição', 'Para que serve', 'Exemplo real', 'Todas as variações', 'Informações técnicas', 'Referências']) {
+  if (!systemAuthority.pageAnatomy.includes(step)) {
+    console.error(`Anatomia documental obrigatória ausente: ${step}`);
+    process.exit(1);
+  }
+}
 
 const missing = required.filter((entry) => !fs.existsSync(path.join(dist, entry)));
 if (missing.length) {
@@ -228,4 +247,12 @@ for (const rule of ['Mobile primeiro na composição.', '64 px', '100dvh', '16 p
   }
 }
 
-console.log(`Build válido: ${htmlFiles.length} páginas verificadas com Marca, responsividade, contraste Light, princípios visuais, Light/Dark, App, Web e documentação.`);
+const howToUsePage = fs.readFileSync(path.join(dist, 'getting-started', 'how-to-use.html'), 'utf8');
+for (const rule of ['Estrutura de fora. Identidade daqui.', 'itamartcjr/brand-and-design-system', 'Projeto atual', 'Exemplo real', 'Todas as variações', 'Informações técnicas', 'Referências']) {
+  if (!howToUsePage.includes(rule)) {
+    console.error(`Contrato de uso do Design System incompleto: ${rule}`);
+    process.exit(1);
+  }
+}
+
+console.log(`Build válido: ${htmlFiles.length} páginas verificadas com autoridade CIIMO, referência estrutural, Marca, responsividade, contraste Light, princípios visuais, Light/Dark, App, Web e documentação.`);

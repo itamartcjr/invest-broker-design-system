@@ -19,6 +19,7 @@ const navigation = [
     short: 'D',
     items: [
       { key: 'home', label: 'Visão geral', href: 'index.html' },
+      { key: 'how-to-use', label: 'Como usar', href: 'getting-started/how-to-use.html' },
       { key: 'coverage', label: 'Cobertura', href: 'getting-started/coverage.html' },
       { key: 'responsive', label: 'Responsividade', href: 'getting-started/responsive.html' },
       { key: 'icons', label: 'Ícones', href: 'getting-started/icons.html' },

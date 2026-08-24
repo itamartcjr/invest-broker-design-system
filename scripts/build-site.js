@@ -5,6 +5,7 @@ const { documentationPages } = require('../src/site-pages');
 const { themePage } = require('../src/theme-page');
 const { visualPrinciplesPage } = require('../src/visual-principles-page');
 const { responsivePage } = require('../src/responsive-page');
+const { howToUsePage } = require('../src/how-to-use-page');
 
 const root = process.cwd();
 const dist = path.join(root, 'dist');
@@ -83,5 +84,6 @@ for (const [route, page] of Object.entries(documentationPages)) {
 write(path.join(dist, themePage.route), renderDocumentationPage(themePage.route, themePage.page));
 write(path.join(dist, visualPrinciplesPage.route), renderDocumentationPage(visualPrinciplesPage.route, visualPrinciplesPage.page));
 write(path.join(dist, responsivePage.route), renderDocumentationPage(responsivePage.route, responsivePage.page));
+write(path.join(dist, howToUsePage.route), renderDocumentationPage(howToUsePage.route, howToUsePage.page));
 write(path.join(dist, 'branding.html'), redirectDocument('./brand/identity.html', 'Identidade visual · CIIMO Design System'));
 write(path.join(dist, '.nojekyll'), '');
