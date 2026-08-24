@@ -100,8 +100,7 @@ for (const contract of ['height: var(--docs-topbar)', '.docs-sidebar__top', '.do
 }
 
 const brandNavGroupsCss = read('brand-nav-groups.css');
-for (const contract of ['.docs-nav__framework-group', '.docs-nav__framework-label', 'AI & Governance']) {
-  if (contract === 'AI & Governance') continue;
+for (const contract of ['.docs-nav__framework-group', '.docs-nav__framework-label']) {
   if (!brandNavGroupsCss.includes(contract)) fail(`Hierarquia visual da Brand ausente: ${contract}`);
 }
 
@@ -136,7 +135,7 @@ for (const contract of ["localStorage.setItem(themeStateKey, theme)", "matchMedi
 }
 
 const brandNavJs = read('brand-nav.js');
-for (const contract of ['[data-framework-group]', 'data.moduleGroup', 'syncFrameworkGroups']) {
+for (const contract of ['[data-framework-group]', 'dataset.moduleGroup', 'syncFrameworkGroups']) {
   if (!brandNavJs.includes(contract)) fail(`Busca/hierarquia da Brand incompleta em brand-nav.js: ${contract}`);
 }
 
