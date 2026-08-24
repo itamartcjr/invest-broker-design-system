@@ -33,6 +33,7 @@ const componentItems = [
 
 const patternItems = [
   { key: 'pattern-investment-reading', label: 'Leitura de investimento', href: 'patterns/investment-reading.html' },
+  { key: 'pattern-asset-performance', label: 'Asset Performance Header', href: 'patterns/asset-performance-header.html' },
   { key: 'pattern-filter-compare', label: 'Filter & Compare', href: 'patterns/filter-compare.html' },
   { key: 'pattern-continuity', label: 'Acompanhamento contínuo', href: 'patterns/continuity.html' },
 ];
