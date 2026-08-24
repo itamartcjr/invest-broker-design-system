@@ -1,43 +1,71 @@
+const { brandNavigationItems, brandNavigationModules } = require('./brand/framework-navigation');
+
 const navigation = [
   {
-    key: 'brand',
-    title: 'Marca',
-    short: 'B',
-    items: [
-      { key: 'brand-overview', label: 'Overview', href: 'brand/index.html' },
-      { key: 'brand-positioning', label: 'Posicionamento', href: 'brand/positioning.html' },
-      { key: 'brand-personality', label: 'Personalidade e voz', href: 'brand/personality.html' },
-      { key: 'brand-experience', label: 'Princípios de produto', href: 'brand/experience.html' },
-      { key: 'brand-visual', label: 'Princípios visuais', href: 'brand/visual-principles.html' },
-      { key: 'brand-identity', label: 'Identidade visual', href: 'brand/identity.html' },
-      { key: 'brand-theme', label: 'Tema claro e escuro', href: 'brand/theme.html' },
-    ],
-    modules: [
-      {
-        key: 'brand-strategy',
-        number: '01',
-        title: 'Estratégia da marca',
-        itemKeys: ['brand-positioning', 'brand-personality', 'brand-experience'],
-      },
-      {
-        key: 'brand-identity-system',
-        number: '02',
-        title: 'Identidade e expressão',
-        itemKeys: ['brand-visual', 'brand-identity', 'brand-theme'],
-      },
-    ],
-  },
-  {
     key: 'start',
-    title: 'Documentação',
-    short: 'D',
+    title: 'Introdução',
+    short: '00',
     items: [
-      { key: 'home', label: 'Visão geral', href: 'index.html' },
+      { key: 'home', label: 'Overview', href: 'index.html' },
       { key: 'how-to-use', label: 'Como usar', href: 'getting-started/how-to-use.html' },
       { key: 'coverage', label: 'Cobertura', href: 'getting-started/coverage.html' },
       { key: 'responsive', label: 'Responsividade', href: 'getting-started/responsive.html' },
-      { key: 'icons', label: 'Ícones', href: 'getting-started/icons.html' },
       { key: 'sources', label: 'Referências', href: 'getting-started/sources.html' },
+    ],
+  },
+  {
+    key: 'brand',
+    title: 'Brand',
+    short: '01',
+    items: brandNavigationItems,
+    modules: brandNavigationModules,
+  },
+  {
+    key: 'foundations',
+    title: 'Foundations',
+    short: '02',
+    items: [
+      { key: 'foundation-brand', label: 'Marca para interface', href: 'foundations/brand-principles.html' },
+      { key: 'foundation-colors', label: 'Colors', href: 'foundations/colors.html' },
+      { key: 'foundation-typography', label: 'Typography', href: 'foundations/typography.html' },
+      { key: 'foundation-spacing', label: 'Spacing & Layout', href: 'foundations/spacing-layout.html' },
+      { key: 'foundation-icons', label: 'Icons', href: 'getting-started/icons.html' },
+      { key: 'foundation-theme', label: 'Light & Dark', href: 'brand/theme.html' },
+      { key: 'foundation-motion', label: 'Motion', href: 'foundations/motion.html' },
+    ],
+  },
+  {
+    key: 'tokens',
+    title: 'Tokens',
+    short: '03',
+    items: [
+      { key: 'tokens-primitive', label: 'Primitive', href: 'tokens/primitive.html' },
+      { key: 'tokens-semantic', label: 'Semantic', href: 'tokens/semantic.html' },
+      { key: 'tokens-component', label: 'Component', href: 'tokens/component.html' },
+    ],
+  },
+  {
+    key: 'components',
+    title: 'Components',
+    short: '04',
+    items: [
+      { key: 'components-overview', label: 'Inventory', href: 'components/index.html' },
+    ],
+  },
+  {
+    key: 'patterns',
+    title: 'Patterns',
+    short: '05',
+    items: [
+      { key: 'pattern-investment-reading', label: 'Leitura de investimento', href: 'patterns/investment-reading.html' },
+    ],
+  },
+  {
+    key: 'examples',
+    title: 'Examples',
+    short: '07',
+    items: [
+      { key: 'example-audience-modes', label: 'Cliente · Corretor · Imobiliária', href: 'examples/audience-modes.html' },
     ],
   },
   {
