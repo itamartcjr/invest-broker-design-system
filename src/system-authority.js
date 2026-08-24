@@ -4,7 +4,7 @@ const systemAuthority = {
   documentationReference: {
     repository: 'itamartcjr/brand-and-design-system',
     role: 'documentation-framework-only',
-    statement: 'A referência ensina como organizar, aprofundar e apresentar a documentação. Ela também pode orientar o shell documental — sidebar, topbar, busca, breadcrumb e drawer — sem definir a estética ou o comportamento do produto CIIMO.',
+    statement: 'A referência orienta arquitetura, shell, hierarquia e profundidade. Conteúdo de marca, identidade, aparência e comportamento continuam vindo da CIIMO.',
   },
   authority: {
     visualAndBehavior: {
@@ -14,27 +14,26 @@ const systemAuthority = {
     },
     brandMeaning: {
       label: 'Estratégia CIIMO',
-      rule: 'Essência, posicionamento, personalidade, linguagem e promessa explicam por que o sistema toma determinadas decisões.',
-      sources: ['src/brand/brand-book.js', 'assets/brand/ciimo_*.svg', 'assets/brand/ii_*.svg'],
+      rule: 'Essência, posicionamento, personalidade, linguagem e promessa vêm da criação oficial da marca.',
+      sources: ['src/brand/brand-book.js', 'src/brand/framework-data.js', 'assets/brand/ciimo_*.svg', 'assets/brand/ii_*.svg'],
     },
     documentedSystem: {
       label: 'Design System CIIMO',
-      rule: 'A documentação consolida decisões existentes em tokens, componentes, padrões e exemplos sem substituir a implementação por uma estética nova.',
-      sources: ['src/site-pages.js', 'src/brand/brand-pages.js', 'src/theme-page.js', 'src/visual-principles-page.js', 'src/responsive-page.js'],
+      rule: 'O Design System traduz a marca e o produto real em foundations, tokens, componentes, patterns, templates e exemplos.',
+      sources: ['src/design-system-pages.js', 'src/design-system-extra-pages.js', 'src/theme-page.js', 'src/responsive-page.js'],
     },
     externalMethod: {
       label: 'Brand e Design System',
-      rule: 'Pode influenciar arquitetura da informação, formato de página, profundidade, governança, shell documental e forma de demonstrar. Não pode introduzir estética CIIMO nem comportamento de produto.',
+      rule: 'Pode influenciar arquitetura da informação, formato de página, profundidade, governança e shell. Não pode introduzir estética ou decisões de marca.',
       sources: ['itamartcjr/brand-and-design-system'],
     },
   },
   referenceCanDefine: [
     'arquitetura da informação',
-    'ordem das seções de documentação',
-    'profundidade mínima por assunto',
-    'forma de separar fundamentos, tokens, componentes, patterns e exemplos',
-    'método para demonstrar exemplos, estados e comparações',
-    'documentação técnica e governança',
+    'hierarquia de navegação',
+    'profundidade por assunto',
+    'separação entre Brand e Design System',
+    'forma de separar foundations, tokens, components, patterns, templates e examples',
     'shell documental: logo no canto superior esquerdo, topbar, sidebar, busca, breadcrumb, GitHub, tema e drawer mobile',
   ],
   referenceCannotDefine: [
@@ -52,9 +51,10 @@ const systemAuthority = {
     'hover, focus, active, loading ou disabled do produto',
     'personalidade e linguagem da marca',
   ],
-  pageAnatomy: ['Título', 'Descrição', 'Para que serve', 'Exemplo real', 'Todas as variações', 'Informações técnicas', 'Referências'],
-  evidenceRule: 'Se uma decisão visual ou comportamental do produto não puder ser apontada no CIIMO atual, ela não deve ser promovida automaticamente a regra do sistema. Primeiro deve ser validada no produto.',
-  consistencyRule: 'Quando implementação e documentação divergirem, investigar a origem. Não copiar a estética da referência externa para resolver a divergência.',
+  brandPageAnatomy: ['Título', 'Conteúdo final da marca', 'Aplicações quando existirem', 'Pendências quando existirem'],
+  designSystemPageAnatomy: ['Título', 'Descrição', 'Regra de uso', 'Exemplo real', 'Variações e estados quando existirem', 'Informações técnicas'],
+  evidenceRule: 'Se uma decisão visual ou comportamental do produto não puder ser apontada no CIIMO atual, ela não deve ser promovida automaticamente a regra do sistema.',
+  consistencyRule: 'Quando implementação e documentação divergirem, investigar a origem e preservar a identidade CIIMO.',
 };
 
 module.exports = { systemAuthority };
