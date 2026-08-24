@@ -1,5 +1,20 @@
 function assetPerformanceHeaderPage({ shellContent, section }) {
-  const preview = `<div class="asset-performance-preview">
+  const previewStyles = `<style>
+    .asset-performance-preview{display:grid;grid-template-columns:minmax(0,1.92fr) minmax(330px,1fr);gap:16px;align-items:stretch}
+    .asset-performance-preview__summary{display:grid;gap:20px;padding:20px;border:1px solid rgba(255,255,255,.1);border-radius:24px;background:radial-gradient(circle at 100% 0%,rgba(111,198,255,.12),transparent 28%),linear-gradient(145deg,#0c1213 0%,#0d1715 72%,#12201d 100%)}
+    .asset-performance-preview__summary header{display:grid;gap:5px}.asset-performance-preview__summary h3{margin:0;color:#fff;font-size:1.35rem}.asset-performance-preview__summary p{max-width:650px;margin:0;font-size:.8rem;color:rgba(244,241,234,.7)}
+    .asset-performance-preview__group{display:grid;gap:10px}.asset-performance-preview__group-label{color:rgba(244,241,234,.6);font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .asset-performance-preview__metrics{display:grid;gap:12px}.asset-performance-preview__metrics--4{grid-template-columns:1.15fr .78fr 1fr 1fr}.asset-performance-preview__metrics--3{grid-template-columns:repeat(3,minmax(0,1fr))}.asset-performance-preview__metrics--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .asset-performance-preview__metric{min-height:74px;display:grid;align-content:center;gap:6px;padding:13px 14px;border:1px solid rgba(255,255,255,.07);border-radius:18px;background:rgba(255,255,255,.04)}.asset-performance-preview__metric.is-featured{border-color:rgba(212,251,0,.28);background:linear-gradient(145deg,rgba(212,251,0,.1),rgba(255,255,255,.035))}
+    .asset-performance-preview__metric small{color:rgba(244,241,234,.64);font-size:.66rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}.asset-performance-preview__metric strong{color:#fff;font-size:1.02rem;line-height:1.1}.asset-performance-preview__metric span{color:rgba(244,241,234,.7);font-size:.72rem;line-height:1.3}
+    .asset-performance-preview__side{display:grid;grid-template-rows:minmax(300px,1.72fr) minmax(176px,1fr);gap:16px}.asset-performance-preview__valuation,.asset-performance-preview__paid{border:1px solid rgba(255,255,255,.14);border-radius:24px;color:#fff}.asset-performance-preview__valuation{display:grid;align-content:space-between;gap:18px;padding:20px;background:radial-gradient(circle at 0% 100%,#7c948f 0%,#6688c7 52%,#547ce0 100%)}
+    .asset-performance-preview__valuation h3{margin:0;font-size:2rem;line-height:1}.asset-performance-preview__valuation>div{display:grid;gap:7px}.asset-performance-preview__valuation small{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.asset-performance-preview__valuation strong{font-size:2.55rem;line-height:.95;letter-spacing:-.045em}.asset-performance-preview__valuation span{width:max-content;padding:7px 11px;border-radius:999px;background:#7dffb5;color:#0f171f;font-size:.8rem;font-weight:900}.asset-performance-preview__valuation footer p{margin:0;color:rgba(255,255,255,.92);font-size:.88rem}
+    .asset-performance-preview__paid{display:grid;align-content:center;gap:8px;padding:20px;background:#111}.asset-performance-preview__paid strong{font-size:2.3rem;line-height:1}.asset-performance-preview__paid span{color:rgba(255,255,255,.9);font-size:.88rem}
+    @media(max-width:1100px){.asset-performance-preview{grid-template-columns:1fr}.asset-performance-preview__side{grid-template-columns:1fr 1fr;grid-template-rows:none}.asset-performance-preview__metrics--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:760px){.asset-performance-preview__metrics--4,.asset-performance-preview__metrics--3,.asset-performance-preview__metrics--2,.asset-performance-preview__side{grid-template-columns:1fr}.asset-performance-preview__valuation strong{font-size:2rem}.asset-performance-preview__paid strong{font-size:1.9rem}}
+  </style>`;
+
+  const preview = `${previewStyles}<div class="asset-performance-preview">
     <section class="asset-performance-preview__summary">
       <header>
         <span class="eyebrow">Resumo do ativo</span>
