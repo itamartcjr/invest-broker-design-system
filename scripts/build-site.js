@@ -33,7 +33,18 @@ function themeBootScript() {
   return `<script>(function(){try{var t=localStorage.getItem('ciimo-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})();</script>`;
 }
 function styleLinks(prefix) {
-  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css"><link rel="stylesheet" href="${prefix}shell-refinement.css"><link rel="stylesheet" href="${prefix}brand-framework.css">`;
+  return [
+    'styles.css',
+    'docs.css',
+    'theme.css',
+    'refinement.css',
+    'color-semantics.css',
+    'mobile.css',
+    'shell-refinement.css',
+    'brand-framework.css',
+    'brand-nav-groups.css',
+    'design-system-boards.css',
+  ].map((file) => `<link rel="stylesheet" href="${prefix}${file}">`).join('');
 }
 function shellChrome(route, prefix) {
   return `${renderSidebar({ currentPath: route, prefix })}<div class="docs-backdrop" data-sidebar-backdrop aria-hidden="true"></div>${renderTopbar({ currentPath: route })}`;
@@ -64,17 +75,23 @@ function redirectDocument(target, title) {
 }
 
 ensureDir(dist);
-copy(path.join(root, 'styles.css'), path.join(dist, 'styles.css'));
-copy(path.join(root, 'catalog.js'), path.join(dist, 'catalog.js'));
-copy(path.join(root, 'src', 'docs.css'), path.join(dist, 'docs.css'));
-copy(path.join(root, 'src', 'theme.css'), path.join(dist, 'theme.css'));
-copy(path.join(root, 'src', 'refinement.css'), path.join(dist, 'refinement.css'));
-copy(path.join(root, 'src', 'color-semantics.css'), path.join(dist, 'color-semantics.css'));
-copy(path.join(root, 'src', 'mobile.css'), path.join(dist, 'mobile.css'));
-copy(path.join(root, 'src', 'shell-refinement.css'), path.join(dist, 'shell-refinement.css'));
-copy(path.join(root, 'src', 'brand-framework.css'), path.join(dist, 'brand-framework.css'));
-copy(path.join(root, 'src', 'docs.js'), path.join(dist, 'docs.js'));
-copy(path.join(root, 'src', 'brand-nav.js'), path.join(dist, 'brand-nav.js'));
+for (const file of [
+  ['styles.css', 'styles.css'],
+  ['catalog.js', 'catalog.js'],
+  ['src/docs.css', 'docs.css'],
+  ['src/theme.css', 'theme.css'],
+  ['src/refinement.css', 'refinement.css'],
+  ['src/color-semantics.css', 'color-semantics.css'],
+  ['src/mobile.css', 'mobile.css'],
+  ['src/shell-refinement.css', 'shell-refinement.css'],
+  ['src/brand-framework.css', 'brand-framework.css'],
+  ['src/brand-nav-groups.css', 'brand-nav-groups.css'],
+  ['src/design-system-boards.css', 'design-system-boards.css'],
+  ['src/docs.js', 'docs.js'],
+  ['src/brand-nav.js', 'brand-nav.js'],
+]) {
+  copy(path.join(root, ...file[0].split('/')), path.join(dist, file[1]));
+}
 copyDir(path.join(root, 'assets', 'brand'), path.join(dist, 'assets', 'brand'));
 
 for (const area of ['app', 'web']) {
@@ -95,5 +112,5 @@ write(path.join(dist, visualPrinciplesPage.route), renderDocumentationPage(visua
 write(path.join(dist, responsivePage.route), renderDocumentationPage(responsivePage.route, responsivePage.page));
 write(path.join(dist, howToUsePage.route), renderDocumentationPage(howToUsePage.route, howToUsePage.page));
 write(path.join(dist, brandOverviewPage.route), renderDocumentationPage(brandOverviewPage.route, brandOverviewPage.page));
-write(path.join(dist, 'branding.html'), redirectDocument('./brand/identity.html', 'Identidade visual · CIIMO Design System'));
+write(path.join(dist, 'branding.html'), redirectDocument('./brand/index.html', 'Brand Framework · CIIMO Design System'));
 write(path.join(dist, '.nojekyll'), '');
