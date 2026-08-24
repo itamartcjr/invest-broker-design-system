@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { renderSidebar } = require('../src/site-components/sidebar');
+const { renderTopbar } = require('../src/site-components/topbar');
 const { documentationPages } = require('../src/site-pages');
 const { themePage } = require('../src/theme-page');
 const { visualPrinciplesPage } = require('../src/visual-principles-page');
@@ -33,6 +34,9 @@ function themeBootScript() {
 function styleLinks(prefix) {
   return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css">`;
 }
+function shellChrome(route, prefix) {
+  return `${renderSidebar({ currentPath: route, prefix })}<div class="docs-backdrop" data-sidebar-backdrop aria-hidden="true"></div>${renderTopbar({ currentPath: route })}`;
+}
 function injectDocumentationScripts(html, prefix) {
   const scripts = `<script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script>`;
   return html
@@ -45,13 +49,13 @@ function transformExistingPage(html, route) {
   let output = html;
   output = output.replace(/<html([^>]*)>/, '<html$1 data-sidebar="collapsed" data-theme="dark">');
   output = output.replace(/<head>/, `<head>${themeBootScript()}`);
-  output = output.replace(/<aside class="sidebar">[\s\S]*?<\/aside>/, renderSidebar({ currentPath: route, prefix }));
+  output = output.replace(/<aside class="sidebar">[\s\S]*?<\/aside>/, shellChrome(route, prefix));
   output = output.replace(/<link rel="stylesheet" href="[^"]*styles\.css">/, `${styleLinks(prefix)}<link rel="icon" href="${prefix}assets/brand/favicon.svg">`);
   return injectDocumentationScripts(output, prefix);
 }
 function renderDocumentationPage(route, page) {
   const prefix = prefixFor(route);
-  return `<!doctype html><html lang="pt-BR" data-sidebar="collapsed" data-theme="dark"><head>${themeBootScript()}<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${page.title}</title><meta name="description" content="Documentação do CIIMO Design System"><link rel="icon" href="${prefix}assets/brand/favicon.svg">${styleLinks(prefix)}</head><body class="native"><div class="catalog">${renderSidebar({ currentPath: route, prefix })}${page.html}</div><script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script></body></html>`;
+  return `<!doctype html><html lang="pt-BR" data-sidebar="collapsed" data-theme="dark"><head>${themeBootScript()}<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${page.title}</title><meta name="description" content="Documentação do CIIMO Design System"><link rel="icon" href="${prefix}assets/brand/favicon.svg">${styleLinks(prefix)}</head><body class="native"><div class="catalog">${shellChrome(route, prefix)}${page.html}</div><script src="${prefix}catalog.js"></script><script src="${prefix}docs.js"></script></body></html>`;
 }
 function redirectDocument(target, title) {
   return `<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0; url=${target}"><title>${title}</title></head><body><p>Esta página mudou. <a href="${target}">Continuar</a>.</p></body></html>`;
