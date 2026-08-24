@@ -14,6 +14,20 @@ function renderLink(item, group, prefix, currentItem, number = '') {
   return `<a class="docs-nav__link${active ? ' active' : ''}" href="${prefix}${item.href}" data-group-label="${escapeHtml(group.title)}" data-page-label="${escapeHtml(item.label)}"${active ? ' aria-current="page"' : ''}>${number ? `<span class="docs-nav__item-no">${escapeHtml(number)}</span>` : ''}<span>${escapeHtml(item.label)}</span></a>`;
 }
 
+function renderModule(module, group, prefix, currentItem) {
+  const items = (module.itemKeys || []).map((key) => group.items.find((item) => item.key === key)).filter(Boolean);
+  return `<details class="docs-nav__module" data-nav-module="${escapeHtml(module.key)}" data-module-group="${escapeHtml(module.group || '')}">
+    <summary class="docs-nav__module-summary">
+      <span class="docs-nav__module-no">${escapeHtml(module.number)}</span>
+      <strong>${escapeHtml(module.title)}</strong>
+      <i class="hgi-stroke hgi-arrow-right-01 docs-nav__module-chevron" aria-hidden="true"></i>
+    </summary>
+    <div class="docs-nav__module-links">
+      ${items.map((item, index) => renderLink(item, group, prefix, currentItem, `${module.number}.${String(index + 1).padStart(2, '0')}`)).join('')}
+    </div>
+  </details>`;
+}
+
 function renderGroupContent(group, prefix, currentItem) {
   if (!Array.isArray(group.modules) || !group.modules.length) {
     return `<div class="docs-nav__links">${group.items.map((item) => renderLink(item, group, prefix, currentItem)).join('')}</div>`;
@@ -21,22 +35,24 @@ function renderGroupContent(group, prefix, currentItem) {
 
   const moduleItemKeys = new Set(group.modules.flatMap((module) => module.itemKeys || []));
   const standalone = group.items.filter((item) => !moduleItemKeys.has(item.key));
+  const moduleGroups = [];
+
+  for (const module of group.modules) {
+    const label = module.group || '';
+    let bucket = moduleGroups.find((entry) => entry.label === label);
+    if (!bucket) {
+      bucket = { label, modules: [] };
+      moduleGroups.push(bucket);
+    }
+    bucket.modules.push(module);
+  }
 
   return `<div class="docs-nav__links docs-nav__links--structured">
     ${standalone.map((item) => renderLink(item, group, prefix, currentItem, '00')).join('')}
-    ${group.modules.map((module) => {
-      const items = (module.itemKeys || []).map((key) => group.items.find((item) => item.key === key)).filter(Boolean);
-      return `<details class="docs-nav__module" data-nav-module="${escapeHtml(module.key)}">
-        <summary class="docs-nav__module-summary">
-          <span class="docs-nav__module-no">${escapeHtml(module.number)}</span>
-          <strong>${escapeHtml(module.title)}</strong>
-          <i class="hgi-stroke hgi-arrow-right-01 docs-nav__module-chevron" aria-hidden="true"></i>
-        </summary>
-        <div class="docs-nav__module-links">
-          ${items.map((item, index) => renderLink(item, group, prefix, currentItem, `${module.number}.${String(index + 1).padStart(2, '0')}`)).join('')}
-        </div>
-      </details>`;
-    }).join('')}
+    ${moduleGroups.map((bucket) => `<div class="docs-nav__framework-group" data-framework-group="${escapeHtml(bucket.label)}">
+      ${bucket.label ? `<span class="docs-nav__framework-label">${escapeHtml(bucket.label)}</span>` : ''}
+      ${bucket.modules.map((module) => renderModule(module, group, prefix, currentItem)).join('')}
+    </div>`).join('')}
   </div>`;
 }
 
