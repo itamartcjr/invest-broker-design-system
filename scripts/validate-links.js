@@ -5,6 +5,8 @@ const { systemAuthority } = require('../src/system-authority');
 const { brandFramework } = require('../src/brand/framework-data');
 const { brandBook } = require('../src/brand/brand-book');
 const { chartCatalog } = require('../src/charts/catalog');
+const { chartGroups, chartTypeOrder } = require('../src/charts/groups');
+const { renderers } = require('../src/charts/renderers');
 const { appChartPreset, webChartPreset } = require('../src/charts/presets');
 
 const root = process.cwd();
@@ -29,6 +31,10 @@ function read(relativePath) {
 function mainClasses(html) {
   const match = html.match(/<main\s+class="([^"]+)"/i);
   return match ? match[1].split(/\s+/).filter(Boolean) : [];
+}
+
+function chartTypesIn(html) {
+  return [...html.matchAll(/data-chart-type="([^"]+)"/g)].map((match) => match[1]);
 }
 
 const required = [
@@ -76,10 +82,34 @@ for (const contract of ['.brand-field-page', '.brand-framework-modules', '.brand
   if (!brandFrameworkCss.includes(contract)) fail(`Contrato visual da Brand ausente: ${contract}`);
 }
 
+for (const sourceFile of ['src/charts/catalog.js', 'src/charts/groups.js', 'src/charts/renderers.js', 'src/charts/presets.js', 'src/charts/pages.js']) {
+  if (!fs.existsSync(path.join(root, sourceFile))) fail(`Arquitetura modular de gráficos incompleta: ${sourceFile}`);
+}
+if (fs.existsSync(path.join(root, 'src/chart-pages.js'))) fail('src/chart-pages.js não pode voltar: gráficos devem permanecer modulares em src/charts/.');
+
+const catalogKeys = Object.keys(chartCatalog);
+if (catalogKeys.length !== 25) fail(`Catálogo de gráficos deve possuir exatamente 25 tipos; encontrado: ${catalogKeys.length}.`);
+if (chartGroups.length !== 4) fail(`Catálogo deve ser organizado em 4 famílias; encontrado: ${chartGroups.length}.`);
+if (chartTypeOrder.length !== 25 || new Set(chartTypeOrder).size !== 25) fail('Os quatro grupos devem cobrir exatamente 25 tipos únicos.');
+for (const type of chartTypeOrder) {
+  if (!chartCatalog[type]) fail(`Tipo do grupo não existe no catálogo: ${type}`);
+  if (typeof renderers[type] !== 'function') fail(`Renderer ausente para o tipo: ${type}`);
+  if (!appChartPreset.examples[type]) fail(`Preset App sem exemplo para: ${type}`);
+  if (!webChartPreset.examples[type]) fail(`Preset Web sem exemplo para: ${type}`);
+}
+if (Object.keys(appChartPreset.examples).length !== 25) fail('Preset App deve possuir exatamente 25 exemplos.');
+if (Object.keys(webChartPreset.examples).length !== 25) fail('Preset Web deve possuir exatamente 25 exemplos.');
+
 const chartsCss = read('charts.css');
-for (const contract of ['.chart-board--mosaic', '.chart-card--hero', '.chart-card--wide', '.chart-card--standard', '.chart-card--compact', '.chart-pie', '.chart-donut--multi', '.chart-heatmap', '.chart-palette-rule', '@media (max-width: 760px)', 'var(--accent)', 'var(--blue)', 'var(--gold)']) {
+for (const contract of [
+  '.chart-grid-shell', 'container-name: chart-grid', 'grid-template-columns: repeat(4',
+  'grid-template-columns: repeat(3', 'grid-template-columns: repeat(2', 'grid-template-columns: 1fr',
+  '.chart-card', '.chart-svg', '.chart-donut', '.chart-gauge', '.chart-heatmap', '.chart-contribution',
+  '@container chart-grid', '@media (max-width: 760px)', 'var(--accent)', 'var(--blue)', 'var(--gold)',
+]) {
   if (!chartsCss.includes(contract)) fail(`Contrato de gráficos ausente em charts.css: ${contract}`);
 }
+if (/grid-column\s*:\s*span/i.test(chartsCss)) fail('Cards de gráfico não podem depender de span: todos devem caber em uma célula do grid.');
 
 const docsJs = read('docs.js');
 for (const contract of ["localStorage.setItem(themeStateKey, theme)", "matchMedia('(max-width: 760px)')", '[data-mobile-menu]', '[data-sidebar-close]', '[data-sidebar-backdrop]', '[data-nav-search]', '[data-topbar-title]', "event.key === 'Escape'"]) {
@@ -130,18 +160,10 @@ for (const rule of [brandBook.essence, brandBook.promise, brandBook.positioning.
 }
 
 const brandMetaPhrases = [
-  '01 / Para que serve',
-  'Decisão que esta página orienta',
-  '02 / Evidência',
-  'De onde esta decisão vem',
-  '03 / Decisão CIIMO',
-  'Esta é a resposta específica da CIIMO',
-  'não é texto de exemplo do framework de referência',
-  '05 / Como executar',
-  '06 / Governança',
-  'Pergunta de construção',
+  '01 / Para que serve', 'Decisão que esta página orienta', '02 / Evidência', 'De onde esta decisão vem',
+  '03 / Decisão CIIMO', 'Esta é a resposta específica da CIIMO', 'não é texto de exemplo do framework de referência',
+  '05 / Como executar', '06 / Governança', 'Pergunta de construção',
 ];
-
 for (const phrase of brandMetaPhrases) {
   if (brandOverview.includes(phrase)) fail(`Texto de framework não permitido no Brand Book: ${phrase}`);
 }
@@ -170,24 +192,19 @@ for (const oldBrandRoute of ['brand/positioning.html', 'brand/personality.html',
   if (!html.includes('url=./index.html')) fail(`Rota antiga da Brand deve redirecionar para o Brand Book: ${oldBrandRoute}`);
 }
 
-if (Object.keys(chartCatalog).length < 15) fail(`Catálogo de gráficos insuficiente: ${Object.keys(chartCatalog).length} tipos.`);
-if (fs.existsSync(path.join(root, 'src', 'chart-pages.js'))) fail('src/chart-pages.js não deve voltar: use src/charts/catalog.js + renderers.js + presets.js + pages.js.');
-for (const source of ['src/charts/catalog.js', 'src/charts/renderers.js', 'src/charts/presets.js', 'src/charts/pages.js']) {
-  if (!fs.existsSync(path.join(root, source))) fail(`Arquitetura modular de gráficos incompleta: ${source}`);
-}
-
-for (const preset of [appChartPreset, webChartPreset]) {
-  if (preset.sections.length < 4) fail(`Preset ${preset.key} precisa organizar gráficos por pelo menos 4 finalidades.`);
-  const cards = preset.sections.flatMap((section) => section.cards);
-  if (cards.length < 12) fail(`Preset ${preset.key} precisa ter pelo menos 12 exemplos; encontrado: ${cards.length}.`);
-  for (const card of cards) {
-    if (!chartCatalog[card.type]) fail(`Preset ${preset.key} usa tipo fora do catálogo: ${card.type}`);
+for (const [route, heading] of [['app/charts.html', 'Gráficos no App.'], ['web/charts.html', 'Gráficos no Web.']]) {
+  const html = read(route);
+  const types = chartTypesIn(html);
+  const uniqueTypes = new Set(types);
+  if (!html.includes(heading)) fail(`Título de gráficos ausente em ${route}`);
+  if (!html.includes('chart-grid-shell') || !html.includes('chart-board')) fail(`Grid modular ausente em ${route}`);
+  if (types.length !== 25 || uniqueTypes.size !== 25) fail(`${route} deve renderizar exatamente os 25 tipos uma vez; encontrado: ${types.length}/${uniqueTypes.size}.`);
+  for (const type of chartTypeOrder) {
+    if (!uniqueTypes.has(type)) fail(`${route} não renderiza o tipo: ${type}`);
   }
-
-  const html = read(preset.route);
-  for (const contract of [preset.heading, 'chart-board--mosaic', 'data-chart-type=', 'chart-card--hero', 'chart-card--wide', 'chart-card--standard', 'chart-card--compact', 'chart-repertoire', 'chart-palette-rule', 'role="img"']) {
-    if (!html.includes(contract)) fail(`Página de gráficos incompleta em ${preset.route}: ${contract}`);
+  for (const contract of ['role="img"', 'chart-legend', 'Grid', '4', '3', '2', '1']) {
+    if (!html.includes(contract)) fail(`Página de gráficos incompleta em ${route}: ${contract}`);
   }
 }
 
-console.log(`Build válido: Brand editorial, Design System separado e catálogo modular com ${Object.keys(chartCatalog).length} tipos de gráfico.`);
+console.log('Build válido: Brand editorial, Design System separado e catálogo de 25 gráficos em grid responsivo 4 → 3 → 2 → 1 verificado.');
