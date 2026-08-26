@@ -4,7 +4,7 @@ function section(number, label, title, description, body) {
   return `<section class="section"><div class="section-head"><div><span class="section-no">${number} / ${label}</span><h2>${title}</h2></div><p>${description}</p></div>${body}</section>`;
 }
 
-const anatomy = systemAuthority.pageAnatomy
+const anatomy = systemAuthority.designSystemPageAnatomy
   .map((label, index) => `<div><b>${String(index + 1).padStart(2, '0')}</b><span>${label}</span></div>`)
   .join('');
 
