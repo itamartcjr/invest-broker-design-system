@@ -41,6 +41,18 @@ Estrutura:
 
 App e Web ficam dentro do Design System porque são superfícies do mesmo produto, embora preservem diferenças reais de implementação.
 
+## Gráficos
+
+O repertório de visualização é data-driven e compartilhado entre App e Web:
+
+- `src/charts/catalog.js` — tipos disponíveis, família e regra de uso.
+- `src/charts/renderers.js` — renderers SVG/CSS reutilizáveis.
+- `src/charts/presets.js` — conteúdo e composição específicos de App e Web.
+- `src/charts/pages.js` — monta as páginas a partir dos presets.
+- `src/charts.css` — layout, responsividade e linguagem visual dos gráficos.
+
+Para adicionar uma nova visualização, primeiro registre o tipo no catálogo e renderer. Depois use esse tipo em um preset. Não duplique SVG/HTML diretamente entre App e Web.
+
 ## Autoridade visual
 
 O projeto `itamartcjr/brand-and-design-system` é referência de arquitetura e organização documental. Ele não define a identidade CIIMO.
@@ -64,6 +76,7 @@ Aparência e comportamento devem ser comprováveis em:
 - `src/brand/framework-pages.js`: renderização editorial da Brand.
 - `src/design-system-pages.js`: páginas principais do Design System.
 - `src/design-system-extra-pages.js`: foundations, components, patterns e templates adicionais.
+- `src/charts/`: catálogo, renderers, presets e páginas de visualização de dados.
 - `src/home-page.js`: entrada Brand / Design System.
 - `src/design-system-overview-page.js`: overview do Design System com App e Web.
 - `src/navigation.js`: navegação centralizada.
