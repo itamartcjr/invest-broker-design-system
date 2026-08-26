@@ -28,7 +28,7 @@ html[data-theme="light"] {
   --border: rgba(17, 17, 17, .14);
   --text: #111111;
   --muted: rgba(17, 17, 17, .68);
-  --accent: #d4fb00;
+  --accent: #afc728;
   --accent-text: #050505;
   --gold: #7a5700;
   --blue: #1f62ad;
@@ -127,7 +127,7 @@ body,
 }
 
 .docs-page .brand-statement {
-  background: linear-gradient(135deg, rgba(212, 251, 0, .09), var(--brand-statement-end));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, transparent), var(--brand-statement-end));
 }
 
 .docs-sidebar__actions {
