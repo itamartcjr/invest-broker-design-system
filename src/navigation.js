@@ -50,6 +50,7 @@ const appItems = [
   { key: 'app-foundations', label: 'Fundamentos', href: 'app/index.html' },
   { key: 'app-entities', label: 'Entidades', href: 'app/entities.html' },
   { key: 'app-data', label: 'Dados', href: 'app/data.html' },
+  { key: 'app-charts', label: 'Gráficos', href: 'app/charts.html' },
   { key: 'app-forms', label: 'Formulários', href: 'app/forms.html' },
   { key: 'app-patterns', label: 'Padrões', href: 'app/patterns.html' },
   { key: 'app-screens', label: 'Telas', href: 'app/screens.html' },
@@ -58,6 +59,7 @@ const appItems = [
 const webItems = [
   { key: 'web-foundations', label: 'Fundamentos', href: 'web/index.html' },
   { key: 'web-data', label: 'Dados', href: 'web/data.html' },
+  { key: 'web-charts', label: 'Gráficos', href: 'web/charts.html' },
   { key: 'web-forms', label: 'Formulários', href: 'web/forms.html' },
   { key: 'web-patterns', label: 'Padrões', href: 'web/patterns.html' },
   { key: 'web-screens', label: 'Telas', href: 'web/screens.html' },
