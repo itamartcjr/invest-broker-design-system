@@ -43,15 +43,27 @@ App e Web ficam dentro do Design System porque são superfícies do mesmo produt
 
 ## Gráficos
 
-O repertório de visualização é data-driven e compartilhado entre App e Web:
+O repertório de visualização é data-driven e compartilhado entre App e Web.
 
-- `src/charts/catalog.js` — tipos disponíveis, família e regra de uso.
+- `src/charts/catalog.js` — os **25 tipos oficiais**, família e regra de uso.
+- `src/charts/groups.js` — as quatro famílias e a ordem única do catálogo.
 - `src/charts/renderers.js` — renderers SVG/CSS reutilizáveis.
-- `src/charts/presets.js` — conteúdo e composição específicos de App e Web.
-- `src/charts/pages.js` — monta as páginas a partir dos presets.
+- `src/charts/presets.js` — conteúdo específico de App e Web para todos os 25 tipos.
+- `src/charts/pages.js` — monta as páginas a partir do catálogo, grupos e presets.
 - `src/charts.css` — layout, responsividade e linguagem visual dos gráficos.
 
-Para adicionar uma nova visualização, primeiro registre o tipo no catálogo e renderer. Depois use esse tipo em um preset. Não duplique SVG/HTML diretamente entre App e Web.
+As quatro famílias são:
+
+1. Séries temporais — 8 padrões.
+2. Barras e comparação — 9 padrões.
+3. Composição e progresso — 5 padrões.
+4. Distribuição e intensidade — 3 padrões.
+
+Cada tipo precisa funcionar em **uma única célula**. O grid responde pela largura disponível em quatro estados: **4 → 3 → 2 → 1 colunas**. Nenhum renderer pode depender de `hero`, `wide`, `compact` ou `grid-column: span` para ficar legível.
+
+As páginas `app/charts.html` e `web/charts.html` renderizam os mesmos 25 tipos, mudando apenas contexto, título, métricas e legendas.
+
+Para adicionar uma nova visualização, primeiro registre o tipo no catálogo e em um dos quatro grupos, implemente o renderer e então adicione exemplos aos dois presets. Não duplique SVG/HTML diretamente entre App e Web.
 
 ## Autoridade visual
 
@@ -76,7 +88,7 @@ Aparência e comportamento devem ser comprováveis em:
 - `src/brand/framework-pages.js`: renderização editorial da Brand.
 - `src/design-system-pages.js`: páginas principais do Design System.
 - `src/design-system-extra-pages.js`: foundations, components, patterns e templates adicionais.
-- `src/charts/`: catálogo, renderers, presets e páginas de visualização de dados.
+- `src/charts/`: catálogo, grupos, renderers, presets e páginas de visualização de dados.
 - `src/home-page.js`: entrada Brand / Design System.
 - `src/design-system-overview-page.js`: overview do Design System com App e Web.
 - `src/navigation.js`: navegação centralizada.
