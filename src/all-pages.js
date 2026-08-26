@@ -5,7 +5,7 @@ const { createExtraDesignSystemPages } = require('./design-system-extra-pages');
 const { homePage } = require('./home-page');
 const { designSystemOverviewPage } = require('./design-system-overview-page');
 const { assetPerformanceHeaderPage } = require('./asset-performance-header-page');
-const { chartPages } = require('./chart-pages');
+const { chartPages } = require('./charts/pages');
 
 const legacyPages = Object.fromEntries(
   Object.entries(sourceLegacyPages).filter(([route]) => !route.startsWith('brand/'))
