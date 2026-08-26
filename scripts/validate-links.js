@@ -12,7 +12,7 @@ const documentationRoutes = new Set(htmlFiles.filter((route) => !isProductRoute(
 const required = [
   'index.html', 'design-system/index.html', 'brand/index.html',
   'styles.css', 'docs.css', 'theme.css', 'refinement.css', 'color-semantics.css', 'mobile.css',
-  'shell-refinement.css', 'brand-framework.css', 'brand-nav-groups.css', 'design-system-boards.css',
+  'shell-refinement.css', 'brand-framework.css', 'brand-nav-groups.css', 'design-system-boards.css', 'charts.css',
   'catalog.js', 'docs.js', 'brand-nav.js', '.nojekyll', 'branding.html',
   'assets/brand/ciimo_cw.svg', 'assets/brand/ciimo_cb.svg', 'assets/brand/ii_v.svg', 'assets/brand/ii_b.svg',
   ...htmlFiles,
@@ -68,6 +68,11 @@ for (const contract of ['.brand-field-page', '.brand-framework-modules', '.brand
   if (!brandFrameworkCss.includes(contract)) fail(`Contrato visual da Brand ausente: ${contract}`);
 }
 
+const chartsCss = read('charts.css');
+for (const contract of ['.chart-board', '.chart-card', '.chart-svg', '.chart-donut', '.chart-heatmap', '.chart-rules', '@media (max-width: 760px)', 'var(--accent)', 'var(--blue)', 'var(--gold)']) {
+  if (!chartsCss.includes(contract)) fail(`Contrato de gráficos ausente em charts.css: ${contract}`);
+}
+
 const docsJs = read('docs.js');
 for (const contract of ["localStorage.setItem(themeStateKey, theme)", "matchMedia('(max-width: 760px)')", '[data-mobile-menu]', '[data-sidebar-close]', '[data-sidebar-backdrop]', '[data-nav-search]', '[data-topbar-title]', "event.key === 'Escape'"]) {
   if (!docsJs.includes(contract)) fail(`Comportamento do shell ausente em docs.js: ${contract}`);
@@ -78,7 +83,7 @@ for (const entry of htmlFiles) {
   for (const contract of ['data-docs-sidebar', 'data-docs-topbar', 'data-nav-search', 'data-mobile-menu', 'data-theme-toggle', 'data-sidebar="collapsed"', 'data-theme="dark"', 'ciimo-theme', 'docs.js', 'brand-nav.js', 'hgi-arrow-right-01', 'hgi-search-01']) {
     if (!html.includes(contract)) fail(`Shell incompleto em ${entry}: ${contract}`);
   }
-  for (const stylesheet of ['theme.css', 'refinement.css', 'color-semantics.css', 'mobile.css', 'shell-refinement.css', 'brand-framework.css', 'brand-nav-groups.css', 'design-system-boards.css']) {
+  for (const stylesheet of ['theme.css', 'refinement.css', 'color-semantics.css', 'mobile.css', 'shell-refinement.css', 'brand-framework.css', 'brand-nav-groups.css', 'design-system-boards.css', 'charts.css']) {
     if (!html.includes(stylesheet)) fail(`Folha ${stylesheet} não encontrada em ${entry}`);
   }
   for (const asset of ['ciimo_cw.svg', 'ciimo_cb.svg', 'ii_v.svg', 'ii_b.svg']) {
@@ -99,6 +104,8 @@ if (!startGroup || !brandGroup || !designGroup) fail('Navegação deve separar C
 if (navigation.some((group) => group.key === 'app' || group.key === 'web')) fail('App e Web devem existir dentro de Design System, não como grupos principais.');
 if (!designGroup.items.some((item) => item.href === 'app/index.html')) fail('App não está dentro de Design System.');
 if (!designGroup.items.some((item) => item.href === 'web/index.html')) fail('Web não está dentro de Design System.');
+if (!designGroup.items.some((item) => item.href === 'app/charts.html')) fail('Página de Gráficos do App não está dentro de Design System.');
+if (!designGroup.items.some((item) => item.href === 'web/charts.html')) fail('Página de Gráficos do Web não está dentro de Design System.');
 if (!designGroup.items.some((item) => item.href === 'design-system/index.html')) fail('Overview do Design System ausente.');
 
 const home = read('index.html');
@@ -157,4 +164,14 @@ for (const oldBrandRoute of ['brand/positioning.html', 'brand/personality.html',
   if (!html.includes('url=./index.html')) fail(`Rota antiga da Brand deve redirecionar para o Brand Book: ${oldBrandRoute}`);
 }
 
-console.log(`Build válido: Brand editorial com ${brandFramework.modules.length} módulos e Design System separado com App/Web.`);
+for (const [route, expected] of [
+  ['app/charts.html', ['Gráficos no App.', 'Valor atual vs. contratado', 'Valorização x INCC', 'Oportunidades por bairro', 'chart-board--app']],
+  ['web/charts.html', ['Gráficos no Web.', 'Evolução da carteira', 'Preço / m²', 'Concentração do fluxo', 'chart-board--web']],
+]) {
+  const html = read(route);
+  for (const contract of [...expected, 'role="img"', 'chart-legend', 'chart-mobile-spec']) {
+    if (!html.includes(contract)) fail(`Página de gráficos incompleta em ${route}: ${contract}`);
+  }
+}
+
+console.log('Build válido: Brand editorial, Design System separado e páginas de gráficos App/Web verificadas.');
