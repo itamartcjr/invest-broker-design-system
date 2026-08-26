@@ -32,7 +32,7 @@ function themeBootScript() {
   return `<script>(function(){try{var t=localStorage.getItem('ciimo-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})();</script>`;
 }
 function styleLinks(prefix) {
-  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css"><link rel="stylesheet" href="${prefix}shell-refinement.css"><link rel="stylesheet" href="${prefix}brand-framework.css"><link rel="stylesheet" href="${prefix}brand-nav-groups.css"><link rel="stylesheet" href="${prefix}design-system-boards.css">`;
+  return `<link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}docs.css"><link rel="stylesheet" href="${prefix}theme.css"><link rel="stylesheet" href="${prefix}refinement.css"><link rel="stylesheet" href="${prefix}color-semantics.css"><link rel="stylesheet" href="${prefix}mobile.css"><link rel="stylesheet" href="${prefix}shell-refinement.css"><link rel="stylesheet" href="${prefix}brand-framework.css"><link rel="stylesheet" href="${prefix}brand-nav-groups.css"><link rel="stylesheet" href="${prefix}design-system-boards.css"><link rel="stylesheet" href="${prefix}charts.css">`;
 }
 function shellChrome(route, prefix) {
   return `${renderSidebar({ currentPath: route, prefix })}<div class="docs-backdrop" data-sidebar-backdrop aria-hidden="true"></div>${renderTopbar({ currentPath: route })}`;
@@ -65,7 +65,7 @@ function redirectDocument(target, title) {
 ensureDir(dist);
 copy(path.join(root, 'styles.css'), path.join(dist, 'styles.css'));
 copy(path.join(root, 'catalog.js'), path.join(dist, 'catalog.js'));
-for (const file of ['docs.css', 'theme.css', 'refinement.css', 'color-semantics.css', 'mobile.css', 'shell-refinement.css', 'brand-framework.css', 'brand-nav-groups.css', 'design-system-boards.css', 'docs.js', 'brand-nav.js']) {
+for (const file of ['docs.css', 'theme.css', 'refinement.css', 'color-semantics.css', 'mobile.css', 'shell-refinement.css', 'brand-framework.css', 'brand-nav-groups.css', 'design-system-boards.css', 'charts.css', 'docs.js', 'brand-nav.js']) {
   copy(path.join(root, 'src', file), path.join(dist, file));
 }
 copyDir(path.join(root, 'assets', 'brand'), path.join(dist, 'assets', 'brand'));
